@@ -11,22 +11,34 @@ public class GroupMember {
     private BigInteger y;
     private long userId;
     private BigInteger pi;
+    private BigInteger pipow;
 
-    public GroupMember(BigInteger x, BigInteger y, BigInteger pi) {
+    public GroupMember(BigInteger x, BigInteger y, BigInteger pi, BigInteger pipow) {
         // 暂时用时间戳代替userId
         userId = System.currentTimeMillis();
         this.x = x;
         this.y = y;
         this.pi = pi;
+        this.pipow = pipow;
+    }
+
+    protected long getUserId() {
+        return userId;
+    }
+
+    protected BigInteger getY() {
+        return y;
+    }
+
+    protected BigInteger getPi() {
+        return pi;
     }
 
     /**
-     *
-     * @param gs
      * @return
      */
-    public BigInteger[] getGroupMemberSelfKey(GroupSinature gs){
-        BigInteger[] gmsf = {x, pi, pi.pow(gs.getGroupPubKey().intValue())};
+    public BigInteger[] getGroupMemberSelfKey(){
+        BigInteger[] gmsf = {x, pi, pipow};
         return gmsf;
     }
 }

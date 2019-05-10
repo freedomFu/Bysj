@@ -70,8 +70,18 @@ public class Test {
         System.out.println(c.getRes(remain, mode));
     }
 
+    public static void test5(){
+        GroupSinature gs = new GroupSinature();
+        gs.addMember();
+        gs.addMember();
+        gs.addMember();
+
+        System.out.println(Arrays.toString(gs.getGroupPubKey()));
+
+    }
+
     public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
+        test5();
     }
 
 }

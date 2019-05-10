@@ -1,12 +1,12 @@
 package com.folm.bysj.testMath;
 
+import com.folm.bysj.math.CRT;
 import com.folm.bysj.math.CreateBigPrime;
 import com.folm.bysj.math.Exponentiation;
 import com.folm.bysj.math.RSA;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * 群中心类
@@ -14,7 +14,9 @@ import java.util.List;
  */
 public class GroupSinature {
 
-    private List<GroupMember> memberList = new ArrayList<>();
+    private List<GroupMember> memberList = new ArrayList<>(); //成员list
+    private List<Object[]> manageInfoList = new ArrayList<>(); // 管理员获取到的成员信息
+    private Map<Long, BigInteger> userInfoMap = new HashMap<>(); // 成员信息
     // 两个大素数p、q以及它们的乘积，还有选择的大整数 e
     private BigInteger p = new CreateBigPrime().getPrime(1024);
     private BigInteger q = new CreateBigPrime().getPrime(1024);
@@ -31,26 +33,6 @@ public class GroupSinature {
         BigInteger[][] key = rsa.genkey(p, q, e);
         BigInteger[] res = {key[0][1],key[1][1]};
         return res;
-    }
-
-    /**
-     * 获取群私钥 为私有方法
-     * @return
-     */
-    private BigInteger getGroupSelfKey(){
-        BigInteger[][] key = rsa.genkey(p, q, e);
-        BigInteger[] res = {key[0][1],key[1][1]};
-        return res[1];
-    }
-
-    /**
-     * 获取群公钥，对于整个系统的所用用户开放，比如群成员、验证者等
-     * @return
-     */
-    public BigInteger getGroupPubKey(){
-        BigInteger[][] key = rsa.genkey(p, q, e);
-        BigInteger[] res = {key[0][1],key[1][1]};
-        return res[0];
     }
 
     /**
@@ -79,17 +61,26 @@ public class GroupSinature {
         BigInteger x = key[1][1];
         boolean flag = (x.multiply(y).mod(fy).compareTo(BigInteger.ONE) == 0)?true:false;
         // 返回该群成员的公钥 y 和 私钥 x
-        Object[] res = {y, x, flag};
+        Object[] res = {y, x, flag, r.multiply(q)};
         return res;
     }
 
+    /**
+     *
+     */
     public void addMember(){
         while(true){
             Object[] res = this.createKey();
             if((boolean)res[2]){
                 BigInteger pi = getValidP();
-                GroupMember gm = new GroupMember((BigInteger)res[1], (BigInteger)res[0], pi);
+                BigInteger e = getGroupKey()[0];
+                BigInteger d = getGroupKey()[1];
+                GroupMember gm = new GroupMember((BigInteger)res[1], (BigInteger)res[0], pi, new Exponentiation().expMode(p, d.multiply(e), n));
                 memberList.add(gm);
+                long userId = gm.getUserId();
+                addGroupManger((BigInteger)res[0], userId);
+                userInfoMap.put(userId, (BigInteger)res[3]);
+                System.out.println(userInfoMap);
                 break;
             }else{
                 continue;
@@ -122,12 +113,31 @@ public class GroupSinature {
         }
         return p;
     }
+    /**
+     * 获取群公钥，对于整个系统的所用用户开放，比如群成员、验证者等
+     * @return
+     */
+    public BigInteger[] getGroupPubKey(){
+        BigInteger[] res = {n, e, crtGetc()};
+        return res;
+    }
 
+    private void addGroupManger(BigInteger yi, long userId){
+        Object[] userInfo = {userId,yi};
+        manageInfoList.add(userInfo);
+    }
 
+    private BigInteger crtGetc(){
+        List<GroupMember> gm = memberList;
+        int size = gm.size();
 
+        List<BigInteger> ylist = new ArrayList<>();
+        List<BigInteger> plist = new ArrayList<>();
 
-
-
-
-
+        for(int i=0;i<size;i++){
+            ylist.add(gm.get(i).getY());
+            plist.add(gm.get(i).getPi());
+        }
+        return new CRT().getRes(ylist, plist);
+    }
 }
