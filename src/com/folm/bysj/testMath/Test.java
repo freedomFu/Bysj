@@ -1,12 +1,17 @@
 package com.folm.bysj.testMath;
 
 import java.math.BigInteger;
-import com.folm.bysj.math.CreateBigPrime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
+import com.folm.bysj.math.*;
 
 public class Test {
 
-    public static void main(String[] args) {
-        /*Gcd g = new Gcd();
+    public static void test1(){
+        Gcd g = new Gcd();
         System.out.println(g.gcd(new BigInteger("321312321312"),new BigInteger("12332131233333333212")));
 
         System.out.println("扩展欧几里得算法");
@@ -17,13 +22,11 @@ public class Test {
         System.out.println(ex.expMode(new BigInteger("1000"),new BigInteger("100"),new BigInteger("988")));
 
         BigInteger i = new BigInteger("10000000000000");
-        System.out.println(i.toString(2));*/
+        System.out.println(i.toString(2));
+    }
 
+    public static void test2(){
         // 公钥私钥中用到的两个大质数p,q
-        //BigInteger p = new BigInteger("106697219132480173106064317148705638676529121742557567770857687729397446898790451577487723991083173010242416863238099716044775658681981821407922722052778958942891831033512463262741053961681512908218003840408526915629689432111480588966800949428079015682624591636010678691927285321708935076221951173426894836169") ;
-        //BigInteger q = new BigInteger("144819424465842307806353672547344125290716753535239658417883828941232509622838692761917211806963011168822281666033695157426515864265527046213326145174398018859056439431422867957079149967592078894410082695714160599647180947207504108618794637872261572262805565517756922288320779308895819726074229154002310375209") ;
-        //BigInteger q = new BigInteger("120371954254994515138143812615536898352641937824315813197951875780681426467598518198990656278460748609304381349182033606055450189912485082638296128712897537532221858825795431366710187102673020350499764792016438420274357106216624521255590778192578693116422606321127263304877469325671286581965870060007476183841") ;
-
         BigInteger p = new CreateBigPrime().getPrime(1024);
         BigInteger q = new CreateBigPrime().getPrime(1024);
 
@@ -34,7 +37,7 @@ public class Test {
 
         // 生成公钥私钥
         // pubkey, selfkey = gen_key(p, q)
-        BigInteger[][] keys = rsa.genkey(p, q);
+        BigInteger[][] keys = rsa.genkey(p, q, new BigInteger("65537"));
         BigInteger[] pubkey  = keys[0] ;
         BigInteger[] selfkey = keys[1] ;
 
@@ -47,9 +50,29 @@ public class Test {
         // 信息解密
         BigInteger d = rsa.decrypt(c, selfkey) ;
         System.out.println("被解密后信息：" + d);
+    }
 
+    public static void test3(){
+        GroupSinature gs = new GroupSinature();
+        gs.isValid();
+    }
 
+    public static void test4(){
+        CRT c = new CRT();
+        List<BigInteger> mode = new ArrayList<>();
+        mode.add(new BigInteger("3"));
+        mode.add(new BigInteger("5"));
+        mode.add(new BigInteger("7"));
 
+        List<BigInteger> remain = new ArrayList<>();
+        remain.add(new BigInteger("2"));
+        remain.add(new BigInteger("3"));
+        remain.add(new BigInteger("2"));
+        System.out.println(c.getRes(remain, mode));
+    }
+
+    public static void main(String[] args) {
+        test4();
     }
 
 }

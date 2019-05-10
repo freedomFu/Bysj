@@ -43,4 +43,14 @@ public class Gcd {
             return result;
         }
     }
+
+    /**
+     * 获取逆元
+     * @param a
+     * @param b
+     * @return
+     */
+    public BigInteger getInverseEle(BigInteger a, BigInteger b){
+        return extGcd(a, b)[1];
+    }
 }

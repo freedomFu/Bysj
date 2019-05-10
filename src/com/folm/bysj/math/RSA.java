@@ -1,7 +1,4 @@
-package com.folm.bysj.testMath;
-
-import com.folm.bysj.math.Gcd;
-import com.folm.bysj.math.Exponentiation;
+package com.folm.bysj.math;
 
 import java.math.BigInteger;
 
@@ -16,10 +13,9 @@ public class RSA {
      * @param q 大素数 q
      * @return 返回公钥、私钥
      */
-    public BigInteger[][] genkey(BigInteger p, BigInteger q){
+    public BigInteger[][] genkey(BigInteger p, BigInteger q, BigInteger e){
         BigInteger n = p.multiply(q);
         BigInteger fy = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE));
-        BigInteger e = new BigInteger("65537");
 
         // 得到解密需要的d
         BigInteger a = e;
@@ -28,14 +24,14 @@ public class RSA {
         BigInteger r = rxy[0];
         BigInteger x = rxy[1];
         BigInteger y = rxy[2];
-        System.out.println("转换之前的x:"+x);
+//        System.out.println("转换之前的x:"+x);
 
         if(x.compareTo(BigInteger.ZERO) == -1){
             x = x.add(fy);
         }
 
         BigInteger d = x;
-        System.out.println("输出x"+x);
+//        System.out.println("输出x"+x);
         // 返回 公钥 ， 私钥
         // 公钥用于产生 密文，私钥用于恢复明文
         return new BigInteger[][]{{n, e}, {n, d}};
