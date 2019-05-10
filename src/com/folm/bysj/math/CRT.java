@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * 中国剩余定理
+ * @author folm
  */
 public class CRT {
     /**

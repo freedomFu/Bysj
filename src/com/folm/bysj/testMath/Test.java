@@ -54,7 +54,6 @@ public class Test {
 
     public static void test3(){
         GroupSinature gs = new GroupSinature();
-        gs.isValid();
     }
 
     public static void test4(){
@@ -72,7 +71,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        test4();
+        System.out.println(System.currentTimeMillis());
     }
 
 }
