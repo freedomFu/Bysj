@@ -90,23 +90,36 @@ public class Test {
         BigInteger si = (BigInteger) res[1];
         BigInteger n = gs.getN();
         BigInteger pi = pipow.mod(n);
-        // 需要求出真实的 pi 和 ni
-        BigInteger relpi = gm.getPi();
-        BigInteger yi = c.mod(relpi);
+
+        BigInteger yi = c.mod(pi);
         BigInteger ni = gm.getNi(gs);
 
         BigInteger check_hm = new Exponentiation().expMode(si, yi, ni);
         BigInteger old_hm = gs.MyHash(msg);
 
-
         System.out.println("嘤嘤嘤");
     }
 
     public static void test6(){
+
+        GroupSinature gs = new GroupSinature();
+        gs.addMember();
+        gs.addMember();
+        gs.addMember();
+        GroupMember gm = gs.getgMember(1);
+        String msg = "give me the ball";
+
+        System.out.println(new GroupManager().isSignCorrect(gs, gm, msg));
+        System.out.println("用户id是："+gm.getUserId());
+
+        // 通过打开签名得到 用户信息
+        // 得到用户签名
+        Long l = new GroupManager().openSign(gs,gm,msg);
+        System.out.println(l);
     }
 
     public static void main(String[] args) {
-        test5();
+        test6();
     }
 
 }

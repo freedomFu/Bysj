@@ -17,7 +17,7 @@ import java.util.*;
 public class GroupSinature {
 
     private List<GroupMember> memberList = new ArrayList<>(); //成员list
-    private List<Object[]> manageInfoList = new ArrayList<>(); // 管理员获取到的成员信息
+    private Map<Long, BigInteger> manageInfoMap = new HashMap<>(); // 管理员获取到的成员信息
     private Map<Long, BigInteger> userInfoMap = new HashMap<>(); // 成员信息
     // 两个大素数p、q以及它们的乘积，还有选择的大整数 e
     private BigInteger p = new CreateBigPrime().getPrime(1024);
@@ -78,20 +78,58 @@ public class GroupSinature {
         while(true){
             Object[] res = this.createKey();
             if((boolean)res[2]){
-                BigInteger pi = getValidP();
-                BigInteger e = getGroupKey()[0];
-                BigInteger d = getGroupKey()[1];
-                GroupMember gm = new GroupMember((BigInteger)res[1], (BigInteger)res[0], pi, new Exponentiation().expMode(p, d.multiply(e), n));
+                BigInteger[] pieArray = getValidP();
+                BigInteger pi = pieArray[0];
+                BigInteger pie = pieArray[1];
+                GroupMember gm = new GroupMember((BigInteger)res[1], (BigInteger)res[0], pi, pie);
                 memberList.add(gm);
+                // System.out.println(pi.mod(n));
+                // System.out.println(pie);
                 long userId = gm.getUserId();
                 addGroupManger((BigInteger)res[0], userId);
                 userInfoMap.put(userId, (BigInteger)res[3]);
-//                System.out.println(userInfoMap);
                 break;
             }else{
                 continue;
             }
         }
+    }
+
+    /**
+     * 获取用户id
+     * @param yi
+     * @param ni
+     * @return
+     */
+    public Long getUserIdByYiAndNi(BigInteger yi,BigInteger ni){
+        Set<Long> res = new HashSet<>();
+        // yi
+        Set<Long> ySet = getKey(manageInfoMap, yi);
+        // ni
+        Set<Long> nSet = getKey(userInfoMap, ni);
+
+        res.addAll(ySet);
+        res.retainAll(nSet);
+
+        if(res.size() == 1){
+            return (Long)res.toArray()[0];
+        }else{
+            return null;
+        }
+
+    }
+
+    public static Set<Long> getKey(Map<Long,BigInteger> map, BigInteger v) {
+        Iterator<Long> it = map.keySet().iterator();
+        Set<Long> res = new HashSet<>();
+
+        while(it.hasNext()){
+            long key = it.next();
+            if(map.get(key).equals(v)){
+                res.add(key);
+            }
+        }
+        return res;
     }
 
     /**
@@ -112,8 +150,10 @@ public class GroupSinature {
      * 获取合法的p
      * @return
      */
-    private BigInteger getValidP(){
+    private BigInteger[] getValidP(){
         BigInteger p;
+        BigInteger[] res = new BigInteger[2];
+        BigInteger pie;
         while(true){
              p = new CreateBigPrime().getPrime(513);
 
@@ -122,14 +162,17 @@ public class GroupSinature {
             BigInteger d = getGroupKey()[1];
 
             BigInteger right = new Exponentiation().expMode(p, d.multiply(e), n);
+            pie = right;
 
             if(left.compareTo(right)==0){
+                res[0] = p;
+                res[1] = pie;
                 break;
             }else{
                 continue;
             }
         }
-        return p;
+        return res;
     }
     /**
      * 获取群公钥，对于整个系统的所用用户开放，比如群成员、验证者等
@@ -146,8 +189,7 @@ public class GroupSinature {
      * @param userId
      */
     private void addGroupManger(BigInteger yi, long userId){
-        Object[] userInfo = {userId,yi};
-        manageInfoList.add(userInfo);
+        manageInfoMap.put(userId, yi);
     }
 
     /**
