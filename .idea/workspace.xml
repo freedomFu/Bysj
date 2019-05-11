@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4b589ad7-cfcc-46b4-a986-81f3a5c9add1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/bysj/math/CRT.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/bysj/math/CRT.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/bysj/testMath/GroupMember.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/bysj/testMath/GroupMember.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/bysj/testMath/GroupSinature.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/bysj/testMath/GroupSinature.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/bysj/testMath/Test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/bysj/testMath/Test.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupMember.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupSinature.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupSinature.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/folm/bysj/testMath/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/bysj/testMath/Test.java" afterDir="false" />
     </list>
@@ -34,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="383">
-              <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
+            <state relative-caret-position="391">
+              <caret line="85" selection-start-line="85" selection-end-line="85" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2341#2342#0" expanded="true" />
@@ -51,10 +45,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/Sha_demo.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="16" column="74" selection-start-line="16" selection-start-column="67" selection-end-line="16" selection-end-column="74" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupSinature.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="183">
-              <caret line="81" column="60" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
+            <state relative-caret-position="317">
+              <caret line="150" column="21" selection-start-line="150" selection-start-column="21" selection-end-line="150" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -149,13 +155,13 @@
         <option value="$PROJECT_DIR$/src/com/folm/bysj/math/CRT.java" />
         <option value="$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupMember.java" />
         <option value="$PROJECT_DIR$/src/com/folm/bysj/testMath/Test.java" />
+        <option value="$PROJECT_DIR$/src/com/folm/bysj/testMath/Sha_demo.java" />
         <option value="$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupSinature.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="154" />
-    <option name="y" value="142" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
     <option name="width" value="974" />
     <option name="height" value="1057" />
   </component>
@@ -210,7 +216,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557529649897" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1557538822199" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../OrderFuture" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -237,7 +243,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Test">
+  <component name="RunManager" selected="Application.Sha_demo">
     <configuration name="BigPrimeUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.folm.bysj.testMath.BigPrimeUtils" />
       <module name="Bysj" />
@@ -264,12 +270,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreateBigPrime" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.folm.bysj.testMath.CreateBigPrime" />
+    <configuration name="GroupSinature" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.folm.bysj.testMath.GroupSinature" />
       <module name="Bysj" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.folm.bysj.math.*" />
+          <option name="PATTERN" value="com.folm.bysj.testMath.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -277,8 +283,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GroupSinature" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.folm.bysj.testMath.GroupSinature" />
+    <configuration name="Sha_demo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.folm.bysj.testMath.Sha_demo" />
       <module name="Bysj" />
       <extension name="coverage">
         <pattern>
@@ -305,11 +311,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Sha_demo" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.CRT" />
         <item itemvalue="Application.GroupSinature" />
         <item itemvalue="Application.BigPrimeUtils" />
-        <item itemvalue="Application.CreateBigPrime" />
       </list>
     </recent_temporary>
   </component>
@@ -326,18 +332,18 @@
       <workItem from="1557365782145" duration="4548000" />
       <workItem from="1557370455227" duration="114000" />
       <workItem from="1557370717355" duration="18201000" />
-      <workItem from="1557446284901" duration="40793000" />
+      <workItem from="1557446284901" duration="44968000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="63656000" />
+    <option name="totallyTimeSpent" value="67831000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23081024" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.4737418" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -368,7 +374,7 @@
       <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2308534" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.4737418" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -473,6 +479,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="90" lean-forward="true" selection-start-line="9" selection-start-column="90" selection-end-line="9" selection-end-column="90" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupMember.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="471">
@@ -488,10 +504,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/App.java">
+    <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/Test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="90" lean-forward="true" selection-start-line="9" selection-start-column="90" selection-end-line="9" selection-end-column="90" />
+        <state relative-caret-position="391">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2341#2342#0" expanded="true" />
+            <element signature="e#2395#2396#0" expanded="true" />
+            <element signature="e#2926#2927#0" expanded="true" />
+            <element signature="e#2988#2989#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/Sha_demo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="16" column="74" selection-start-line="16" selection-start-column="67" selection-end-line="16" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -500,24 +530,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/GroupSinature.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="81" column="60" selection-start-line="81" selection-start-column="60" selection-end-line="81" selection-end-column="60" />
+        <state relative-caret-position="317">
+          <caret line="150" column="21" selection-start-line="150" selection-start-column="21" selection-end-line="150" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/bysj/testMath/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="74" column="23" lean-forward="true" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2341#2342#0" expanded="true" />
-            <element signature="e#2395#2396#0" expanded="true" />
-            <element signature="e#2926#2927#0" expanded="true" />
-            <element signature="e#2988#2989#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -80,6 +80,12 @@ public class Test {
 
     }
 
+    public static void test6(){
+        String msg = "give me the ball";
+
+
+    }
+
     public static void main(String[] args) {
         test5();
     }

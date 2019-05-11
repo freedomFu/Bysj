@@ -6,6 +6,8 @@ import com.folm.bysj.math.Exponentiation;
 import com.folm.bysj.math.RSA;
 
 import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 /**
@@ -80,7 +82,7 @@ public class GroupSinature {
                 long userId = gm.getUserId();
                 addGroupManger((BigInteger)res[0], userId);
                 userInfoMap.put(userId, (BigInteger)res[3]);
-                System.out.println(userInfoMap);
+//                System.out.println(userInfoMap);
                 break;
             }else{
                 continue;
@@ -127,6 +129,10 @@ public class GroupSinature {
         manageInfoList.add(userInfo);
     }
 
+    /**
+     * 求得 同余方程组的解
+     * @return
+     */
     private BigInteger crtGetc(){
         List<GroupMember> gm = memberList;
         int size = gm.size();
@@ -139,5 +145,28 @@ public class GroupSinature {
             plist.add(gm.get(i).getPi());
         }
         return new CRT().getRes(ylist, plist);
+    }
+
+    /**
+     * 使用 SHA-256哈希加密
+     * @param msg
+     * @return
+     */
+    public static BigInteger MyHash(String msg){
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] bytes = md.digest(msg.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        }catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+        BigInteger res = new BigInteger(generatedPassword, 16);
+
+        return res;
     }
 }
