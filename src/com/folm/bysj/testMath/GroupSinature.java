@@ -26,6 +26,10 @@ public class GroupSinature {
     private BigInteger e = new BigInteger("65537");
     RSA rsa = new RSA();
 
+    protected BigInteger getN() {
+        return n;
+    }
+
     /**
      * 生成群中心的私钥 公钥
      * @return
@@ -150,7 +154,7 @@ public class GroupSinature {
      * 求得 同余方程组的解
      * @return
      */
-    private BigInteger crtGetc(){
+    public BigInteger crtGetc(){
         List<GroupMember> gm = memberList;
         int size = gm.size();
 

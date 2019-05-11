@@ -51,15 +51,33 @@ public class GroupMember {
     }
 
     /**
-     * 成员对消息进行签名
+     * 得到si
+     * @param gs
      * @param msg
      * @return
      */
-    public BigInteger[] sinature(GroupSinature gs,String msg){
+    public BigInteger sinatureSi(GroupSinature gs,String msg){
         BigInteger m = gs.MyHash(msg);
-        BigInteger ni = gs.getnByUserId(userId);
+        BigInteger ni = this.getNi(gs);
         BigInteger si = new Exponentiation().expMode(m, x, ni);
-        BigInteger[] res = {m, si, pipow};
+        return si;
+    }
+
+    public BigInteger getNi(GroupSinature gs){
+        BigInteger ni = gs.getnByUserId(userId);
+        return ni;
+    }
+
+    /**
+     * 进行签名 并返回数组
+     * @param gs
+     * @param msg
+     * @return
+     */
+    public Object[] sign(GroupSinature gs, String msg){
+        BigInteger si= sinatureSi(gs, msg);
+        Object[] res = {msg, si, pipow};
+
         return res;
     }
 }

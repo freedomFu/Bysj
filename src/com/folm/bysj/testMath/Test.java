@@ -73,17 +73,33 @@ public class Test {
 
     public static void test5(){
         GroupSinature gs = new GroupSinature();
+
         String msg = "give me the ball";
         gs.addMember();
         gs.addMember();
         gs.addMember();
 
         System.out.println(Arrays.toString(gs.getGroupPubKey()));
-
+        BigInteger c = gs.crtGetc();
         GroupMember gm = gs.getgMember(1);
         System.out.println(gm.toString());
+        Object[] res = gm.sign(gs,msg);
+        System.out.println(Arrays.toString(res));
 
-        System.out.println(Arrays.toString(gm.sinature(gs, msg)));
+        BigInteger pipow = (BigInteger) res[2];
+        BigInteger si = (BigInteger) res[1];
+        BigInteger n = gs.getN();
+        BigInteger pi = pipow.mod(n);
+        // 需要求出真实的 pi 和 ni
+        BigInteger relpi = gm.getPi();
+        BigInteger yi = c.mod(relpi);
+        BigInteger ni = gm.getNi(gs);
+
+        BigInteger check_hm = new Exponentiation().expMode(si, yi, ni);
+        BigInteger old_hm = gs.MyHash(msg);
+
+
+        System.out.println("嘤嘤嘤");
     }
 
     public static void test6(){
