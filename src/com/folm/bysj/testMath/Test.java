@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 
 import com.folm.bysj.math.*;
+import javafx.scene.Group;
 
 public class Test {
 
@@ -72,18 +73,20 @@ public class Test {
 
     public static void test5(){
         GroupSinature gs = new GroupSinature();
+        String msg = "give me the ball";
         gs.addMember();
         gs.addMember();
         gs.addMember();
 
         System.out.println(Arrays.toString(gs.getGroupPubKey()));
 
+        GroupMember gm = gs.getgMember(1);
+        System.out.println(gm.toString());
+
+        System.out.println(Arrays.toString(gm.sinature(gs, msg)));
     }
 
     public static void test6(){
-        String msg = "give me the ball";
-
-
     }
 
     public static void main(String[] args) {

@@ -89,9 +89,21 @@ public class GroupSinature {
             }
         }
     }
+
+    /**
+     * 根据用户id获取n值
+     * @param userId
+     * @return
+     */
+    public BigInteger getnByUserId(long userId){
+        if(userInfoMap.containsKey(userId)){
+            return userInfoMap.get(userId);
+        }
+        return null;
+    }
+
     // 如果验证成功   群成员就可以相信 这个信息是 由群中心发送过来的
     // 这个内容发送到 用户那里验证  如果成立 这个 信息就会作为用户私钥保存下来
-
     /**
      * 获取合法的p
      * @return
@@ -124,6 +136,11 @@ public class GroupSinature {
         return res;
     }
 
+    /**
+     * 群管理员获取的内容
+     * @param yi
+     * @param userId
+     */
     private void addGroupManger(BigInteger yi, long userId){
         Object[] userInfo = {userId,yi};
         manageInfoList.add(userInfo);
@@ -148,11 +165,11 @@ public class GroupSinature {
     }
 
     /**
-     * 使用 SHA-256哈希加密
+     * 使用 SHA-256哈希加密 并把加密之后的信息转换成BigInteger
      * @param msg
      * @return
      */
-    public static BigInteger MyHash(String msg){
+    public BigInteger MyHash(String msg){
         String generatedPassword = null;
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -166,7 +183,15 @@ public class GroupSinature {
             e.printStackTrace();
         }
         BigInteger res = new BigInteger(generatedPassword, 16);
-
         return res;
+    }
+
+    /**
+     * 返回 GroupMember 对象
+     * @param index
+     * @return
+     */
+    public GroupMember getgMember(int index){
+        return memberList.get(index);
     }
 }

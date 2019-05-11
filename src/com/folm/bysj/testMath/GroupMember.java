@@ -1,6 +1,9 @@
 package com.folm.bysj.testMath;
 
+import com.folm.bysj.math.Exponentiation;
+
 import java.math.BigInteger;
+
 /**
  * 群成员类
  * @author folm
@@ -34,11 +37,29 @@ public class GroupMember {
         return pi;
     }
 
+    @Override
+    public String toString() {
+        return "x:"+x+",\ny:"+y+",\npipow:"+pipow;
+    }
+
     /**
      * @return
      */
     public BigInteger[] getGroupMemberSelfKey(){
         BigInteger[] gmsf = {x, pi, pipow};
         return gmsf;
+    }
+
+    /**
+     * 成员对消息进行签名
+     * @param msg
+     * @return
+     */
+    public BigInteger[] sinature(GroupSinature gs,String msg){
+        BigInteger m = gs.MyHash(msg);
+        BigInteger ni = gs.getnByUserId(userId);
+        BigInteger si = new Exponentiation().expMode(m, x, ni);
+        BigInteger[] res = {m, si, pipow};
+        return res;
     }
 }
