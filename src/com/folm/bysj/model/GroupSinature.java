@@ -1,5 +1,6 @@
-package com.folm.bysj.testMath;
+package com.folm.bysj.model;
 
+import com.folm.bysj.gui.TextPanel;
 import com.folm.bysj.math.CRT;
 import com.folm.bysj.math.CreateBigPrime;
 import com.folm.bysj.math.Exponentiation;
@@ -15,16 +16,42 @@ import java.util.*;
  * @author folm
  */
 public class GroupSinature {
-
-    private List<GroupMember> memberList = new ArrayList<>(); //成员list
-    private Map<Long, BigInteger> manageInfoMap = new HashMap<>(); // 管理员获取到的成员信息
-    private Map<Long, BigInteger> userInfoMap = new HashMap<>(); // 成员信息
+    private TextPanel tp;
+    public List<GroupMember> memberList;
+    private Map<Long, BigInteger> manageInfoMap;
+    private Map<Long, BigInteger> userInfoMap;
     // 两个大素数p、q以及它们的乘积，还有选择的大整数 e
-    private BigInteger p = new CreateBigPrime().getPrime(1024);
-    private BigInteger q = new CreateBigPrime().getPrime(1024);
-    private BigInteger n = p.multiply(q);
-    private BigInteger e = new BigInteger("65537");
-    RSA rsa = new RSA();
+    private BigInteger p;
+    private BigInteger q;
+    private BigInteger n;
+    private BigInteger e;
+    private RSA rsa;
+
+    public GroupSinature(TextPanel tp){
+        this.tp = tp;
+        memberList = new ArrayList<>(); //成员list
+        manageInfoMap = new HashMap<>(); // 管理员获取到的成员信息
+        userInfoMap = new HashMap<>(); // 成员信息
+
+        // 两个大素数p、q以及它们的乘积，还有选择的大整数 e
+        p = new CreateBigPrime().getPrime(1024);
+        q = new CreateBigPrime().getPrime(1024);
+        n = p.multiply(q);
+        e = new BigInteger("65537");
+        rsa = new RSA();
+        tp.appendTextLn("已经成功进入群中心");
+        tp.appendTextLn("========================= 群中心生成过程 —— 开始 =========================");
+        tp.appendTextLn("产生两个大素数p、q！");
+        tp.appendTextLn("p："+p);
+        tp.appendTextLn("q："+q);
+        tp.appendTextLn("计算 n=pxq："+n);
+        tp.appendTextLn("选择 e："+e);
+
+        tp.appendTextLn("计算群中心的公钥和私钥：");
+        tp.appendTextLn("群中心的公钥："+this.getGroupKey()[0]);
+        tp.appendTextLn("群中心的私钥："+this.getGroupKey()[1]);
+        tp.appendTextLn("========================= 群中心生成过程 —— 结束 =========================");
+    }
 
     protected BigInteger getN() {
         return n;
@@ -35,7 +62,6 @@ public class GroupSinature {
      * @return
      */
     private BigInteger[] getGroupKey(){
-
         BigInteger[][] key = rsa.genkey(p, q, e);
         BigInteger[] res = {key[0][1],key[1][1]};
         return res;
@@ -78,16 +104,21 @@ public class GroupSinature {
         while(true){
             Object[] res = this.createKey();
             if((boolean)res[2]){
+                tp.appendTextLn("");
+                tp.appendTextLn("========================= 添加中心群成员 —— 开始 =========================");
                 BigInteger[] pieArray = getValidP();
                 BigInteger pi = pieArray[0];
                 BigInteger pie = pieArray[1];
                 GroupMember gm = new GroupMember((BigInteger)res[1], (BigInteger)res[0], pi, pie);
                 memberList.add(gm);
-                // System.out.println(pi.mod(n));
-                // System.out.println(pie);
                 long userId = gm.getUserId();
                 addGroupManger((BigInteger)res[0], userId);
                 userInfoMap.put(userId, (BigInteger)res[3]);
+                tp.appendTextLn("群成员公钥："+res[0]);
+                tp.appendTextLn("群成员私钥："+res[1]);
+                tp.appendTextLn("选择p："+pi);
+                tp.appendTextLn("添加群成员 userId："+ userId +" 成功");
+                tp.appendTextLn("========================= 添加中心群成员 —— 结束 =========================");
                 break;
             }else{
                 continue;

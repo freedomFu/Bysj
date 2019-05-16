@@ -1,4 +1,4 @@
-package com.folm.bysj.testMath;
+package com.folm.bysj.model;
 
 import com.folm.bysj.math.Exponentiation;
 

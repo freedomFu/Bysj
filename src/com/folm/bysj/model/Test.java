@@ -1,13 +1,11 @@
-package com.folm.bysj.testMath;
+package com.folm.bysj.model;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import com.folm.bysj.math.*;
-import javafx.scene.Group;
 
 public class Test {
 
@@ -53,10 +51,10 @@ public class Test {
         System.out.println("被解密后信息：" + d);
     }
 
-    public static void test3(){
+    /*public static void test3(){
         GroupSinature gs = new GroupSinature();
     }
-
+*/
     public static void test4(){
         CRT c = new CRT();
         List<BigInteger> mode = new ArrayList<>();
@@ -72,7 +70,7 @@ public class Test {
     }
 
     public static void test5(){
-        GroupSinature gs = new GroupSinature();
+        /*GroupSinature gs = new GroupSinature();
 
         String msg = "give me the ball";
         gs.addMember();
@@ -97,12 +95,12 @@ public class Test {
         BigInteger check_hm = new Exponentiation().expMode(si, yi, ni);
         BigInteger old_hm = gs.MyHash(msg);
 
-        System.out.println("嘤嘤嘤");
+        System.out.println("嘤嘤嘤");*/
     }
 
     public static void test6(){
 
-        GroupSinature gs = new GroupSinature();
+       /* GroupSinature gs = new GroupSinature();
         gs.addMember();
         gs.addMember();
         gs.addMember();
@@ -115,7 +113,7 @@ public class Test {
         // 通过打开签名得到 用户信息
         // 得到用户签名
         Long l = new GroupManager().openSign(gs,gm,msg);
-        System.out.println(l);
+        System.out.println(l);*/
     }
 
     public static void main(String[] args) {
