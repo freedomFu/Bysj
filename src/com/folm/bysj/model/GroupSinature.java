@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class GroupSinature {
     private TextPanel tp;
-    public List<GroupMember> memberList;
+    private List<GroupMember> memberList;
     private Map<Long, BigInteger> manageInfoMap;
     private Map<Long, BigInteger> userInfoMap;
     // 两个大素数p、q以及它们的乘积，还有选择的大整数 e
@@ -55,6 +55,10 @@ public class GroupSinature {
 
     protected BigInteger getN() {
         return n;
+    }
+
+    public List<GroupMember> getMemberList() {
+        return memberList;
     }
 
     /**

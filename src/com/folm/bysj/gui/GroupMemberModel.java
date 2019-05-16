@@ -17,6 +17,10 @@ public class GroupMemberModel extends AbstractTableModel {
         this.gs = gs;
     }
 
+    public void setData(List<GroupMember> db){
+        this.db = db;
+    }
+
     @Override
     public String getColumnName(int column) {
         return colNames[column];

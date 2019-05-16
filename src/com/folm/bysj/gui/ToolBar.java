@@ -14,10 +14,12 @@ public class ToolBar extends JPanel implements ActionListener {
     private JButton getCRTcButton;
     private InfoFrame in;
     private GroupSinature gp;
+    private TablePanel tablePanel;
 
-    public ToolBar(InfoFrame in, GroupSinature gp) {
+    public ToolBar(InfoFrame in, GroupSinature gp, TablePanel tablePanel) {
         this.in = in;
         this.gp = gp;
+        this.tablePanel = tablePanel;
 
         setBorder(BorderFactory.createEtchedBorder());
         addGroupMemberButton = new JButton("添加群成员");
@@ -38,6 +40,7 @@ public class ToolBar extends JPanel implements ActionListener {
         JButton clicked = (JButton) e.getSource();
         if(clicked.equals(addGroupMemberButton)){
             gp.addMember();
+            tablePanel.refresh();
         } else if (clicked.equals(getGroupPubKeyButton)){
             info.appendTextLn("获取群公钥");
             BigInteger[] res = gp.getGroupPubKey();
