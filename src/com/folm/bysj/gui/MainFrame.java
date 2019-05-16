@@ -13,6 +13,7 @@ public class MainFrame extends CommonFrame {
     private ToolBar toolbar;
     private GroupSinature gp;
     private InfoFrame in;
+    private FormPanel formPanel;
 
     public MainFrame(InfoFrame in){
         super("Operating Panel", 50 , 50);
@@ -22,6 +23,8 @@ public class MainFrame extends CommonFrame {
         tpInfo.appendTextLn("开始创建系统中心");
         gp = new GroupSinature(tpInfo);
         toolbar = new ToolBar(in, gp);
+        formPanel = new FormPanel(gp, in);
+        add(formPanel, BorderLayout.WEST);
         add(toolbar,BorderLayout.NORTH);
     }
 

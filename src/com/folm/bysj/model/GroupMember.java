@@ -25,7 +25,7 @@ public class GroupMember {
         this.pipow = pipow;
     }
 
-    protected long getUserId() {
+    public long getUserId() {
         return userId;
     }
 
