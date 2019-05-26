@@ -2,6 +2,8 @@ package com.folm.bysj.gui;
 
 import com.folm.bysj.controller.Controller;
 import com.folm.bysj.model.GroupSinature;
+
+import javax.swing.*;
 import java.awt.*;
 
 /**

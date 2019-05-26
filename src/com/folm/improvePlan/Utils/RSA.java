@@ -1,4 +1,6 @@
-package com.folm.bysj.math;
+package com.folm.improvePlan.Utils;
+
+import com.folm.bysj.math.Gcd;
 
 import java.math.BigInteger;
 

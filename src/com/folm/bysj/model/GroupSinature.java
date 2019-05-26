@@ -34,7 +34,7 @@ public class GroupSinature {
         userInfoMap = new HashMap<>(); // 成员信息
 
         // 两个大素数p、q以及它们的乘积，还有选择的大整数 e
-        p = new CreateBigPrime().getPrime(1024);
+        p = new CreateBigPrime().getPrime(1024); 
         q = new CreateBigPrime().getPrime(1024);
         n = p.multiply(q);
         e = new BigInteger("65537");
