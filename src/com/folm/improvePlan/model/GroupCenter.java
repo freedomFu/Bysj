@@ -7,6 +7,7 @@ import com.folm.improvePlan.Utils.GCD;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class GroupCenter {
     private BigInteger dc;
     private int[] defaultData = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     private Subtree sbtree = new Subtree(defaultData);
+    private List<GroupMember> memberRecordList = new ArrayList<>();
+    private GroupManager gmanager = new GroupManager(this);
 
     /**
      * 构造方法
@@ -47,20 +50,20 @@ public class GroupCenter {
         fy = q1.subtract(BigInteger.ONE).multiply(q2.subtract(BigInteger.ONE));
         // 计算乘积
         nc = q1.multiply(q2);
-        // 生成k
-        g = new CreateBigPrime().getPrime(512);
+        // 生成g
+        g = new CreateBigPrime().getPrime(500);
         // 私钥
-        xc = new CreateBigPrime().getPrime(512);
+        xc = new CreateBigPrime().getPrime(500);
         // 生成ec
         ec = new BigInteger("65537");
         // 生成yc
         yc = new Exponentiation().expMode(g, xc, nc);
         // 计算dc  有点问题
         dc = new GCD().getInverseEle(ec,fy);
-//        System.out.println("before:"+dc);
+        System.out.println("before:"+dc);
         // 创建子树 此时还没有初始化群成员
-        sbtree.create();
-//        System.out.println("after:"+dc);
+//        sbtree.create();
+        System.out.println("after:"+dc);
 //        System.out.println("构造方法");
     }
 
@@ -74,6 +77,48 @@ public class GroupCenter {
     public BigInteger[] getGroupInfo(){
         BigInteger[] res = {nc, yc, ec, g, idc};
         return res;
+    }
+
+    public Object[] getEleCheckNewMemberLegal(BigInteger idi){
+        BigInteger alpha = new CreateBigPrime().getPrime(100);
+        BigInteger ng = gmanager.getNg();
+        BigInteger rc = new Exponentiation().expMode(g,alpha,ng);
+        BigInteger sc = alpha.add((rc.multiply(MyHash(String.valueOf(idi)))));//删除了xc ，试一试 剩下的能不能解决
+
+        BigInteger left = new Exponentiation().expMode(g,sc,ng);
+        BigInteger right = rc.multiply(new Exponentiation().expMode(g,rc.multiply(MyHash(String.valueOf(idi))),ng)).mod(ng);
+
+        System.out.println(left);
+        System.out.println("=======================================");
+        System.out.println(right);
+
+        BigInteger left1 = rc.mod(nc);
+        BigInteger right1 = new Exponentiation().expMode(rc,dc.multiply(ec),nc);
+        System.out.println(left1);
+        System.out.println("=======================================");
+        System.out.println(right1);
+
+        return null;
+    }
+
+    public BigInteger getIdc() {
+        return idc;
+    }
+
+    public BigInteger getG() {
+        return g;
+    }
+
+    public BigInteger getNc() {
+        return nc;
+    }
+
+    public BigInteger getYc() {
+        return yc;
+    }
+
+    public BigInteger getEc() {
+        return ec;
     }
 
     /**
@@ -97,6 +142,50 @@ public class GroupCenter {
 
         BigInteger res = new BigInteger(generatedPassword, 16);
         return res;
+    }
+
+    /**
+     * 成员加入
+     * @return
+     */
+    public boolean addMember(){
+        int h = (int)Math.ceil(this.log(defaultData.length, 2));
+        int length = memberRecordList.size();
+        int num = (int)Math.pow(2, h-1) - 1 + length;
+        ArrayList<Object[]> recordData = new ArrayList<>();
+        ArrayList<Integer> list = sbtree.getPathByLeafNode(num);
+
+        for(int i=0;i<list.size();i++){
+            int index = list.get(i);
+            Object[] oArray = sbtree.getMemberRecordData(index);
+            recordData.add(oArray);
+        }
+
+        if(num<=14){
+            int[] xy = sbtree.getXY(num);
+            GroupMember gNewmember = new GroupMember(this, xy, recordData);
+
+            if(null!=gNewmember){
+                memberRecordList.add(gNewmember);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public List<GroupMember> getMemberRecordList() {
+        return memberRecordList;
+    }
+
+    /**
+     * 求对数
+     * @param value
+     * @param base
+     * @return
+     */
+    private double log(double value, double base) {
+        return Math.log(value) / Math.log(base);
     }
 
     /**
@@ -125,13 +214,13 @@ public class GroupCenter {
             BigInteger pkdc;
 
             for(int i=0;i<this.num;i++) {
-                coord = this.getXY(num);
+                coord = this.getXY(i);
                 // 初始化树的每一个节点
-                yk = new CreateBigPrime().getPrime(510);
+                yk = new CreateBigPrime().getPrime(100);
                 xk = new GCD().getInverseEle(yk,fy);
-                pk = new CreateBigPrime().getPrime(512);
-                gxk = new Exponentiation().expMode(g, xk, nc);
-                pkdc = new Exponentiation().expMode(pk, dc, nc);
+                pk = new CreateBigPrime().getPrime(110);
+                gxk = new Exponentiation().expMode(g, xk, fy);
+                pkdc = new Exponentiation().expMode(pk, dc, fy);
                 Object[] recordData = {coord, gxk, yk, pk, pkdc};
                 nodes.add(new Node(recordData, datas[i]));
             }
@@ -143,6 +232,46 @@ public class GroupCenter {
                     nodes.get(nodeId-1).rightChild = nodes.get(nodeId*2);
                 }
             }
+        }
+
+        /**
+         * 获取节点所对应记录的内容
+         * @param index
+         * @return
+         */
+        public Object[] getMemberRecordData(int index){
+            Node node = nodes.get(index);
+            return node.getRecordData();
+        }
+
+        /**
+         * 获取对数值
+         * @param value
+         * @param base
+         * @return
+         */
+        private double log(double value, double base) {
+            return Math.log(value) / Math.log(base);
+        }
+
+        /**
+         * 根据叶子节点的位置获取到达根节点路径上每一个点的信息 也就是num
+         * @param num
+         * @return
+         */
+        public ArrayList<Integer> getPathByLeafNode(int num){
+            ArrayList<Integer> pathList = new ArrayList<>();
+            int h = (int)log(defaultData.length, 2);
+            int[] xy = this.getXY(num);
+            pathList.add(num);
+            int temp = num;
+
+            while((temp+1)/2 > 1){
+                pathList.add((temp+1)/2 - 1);
+                temp = (temp+1) / 2 - 1;
+            }
+            pathList.add(0);
+            return pathList;
         }
 
         /**
@@ -162,15 +291,7 @@ public class GroupCenter {
             return res;
         }
 
-        /**
-         * 获取对数值
-         * @param value
-         * @param base
-         * @return
-         */
-        private double log(double value, double base) {
-            return Math.log(value) / Math.log(base);
-        }
+
 
         /**
          * 子节点
@@ -184,6 +305,10 @@ public class GroupCenter {
             Node(Object[] recordData, int data){
                 this.recordData = recordData;
                 this.data = data;
+            }
+
+            public Object[] getRecordData() {
+                return recordData;
             }
         }
     }

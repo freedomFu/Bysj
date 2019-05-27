@@ -42,6 +42,27 @@ public class Exponentiation {
         return a_w_b.mod(n);
     }
 
+    public BigInteger expMode(BigInteger base, BigInteger exponent){
+        // 这里把指数转换成了二进制，并进行了反转
+        char[] binaryArray = new StringBuilder(exponent.toString(2)).reverse().toString().toCharArray();
+        int r = binaryArray.length;
+        // 创建一个存储基数的list
+        List<BigInteger> baseArray = new ArrayList<>();
+        // 获取基数 并存储到 list 当中
+        BigInteger preBase = base;
+        baseArray.add(preBase);
+        // 循环计算 每次循环之后的基数
+        for(int i=0;i<r-1;i++){
+            BigInteger nextBase = preBase.multiply(preBase);
+            baseArray.add(nextBase);
+            preBase = nextBase; // 更新前一个基数的值
+        }
+
+        BigInteger a_w_b = this.multi(baseArray.toArray(new BigInteger[baseArray.size()]),binaryArray);
+        // 最后的取模操作与正常的取模操作无异
+        return a_w_b;
+    }
+
     /**
      *
      * @param array 基数数组
@@ -60,6 +81,20 @@ public class Exponentiation {
             // 进行乘法以及取模运算
             result = result.multiply(a);
             result = result.mod(n);
+        }
+        return result;
+    }
+
+    private BigInteger multi(BigInteger[] array, char[] bin_array){
+        BigInteger result = BigInteger.ONE;
+        for(int index=0;index<array.length;index++){
+            BigInteger a = array[index];
+            // 如果二进制为0 就相当于乘以1，也就是不执行
+            if(bin_array[index] == '0'){
+                continue;
+            }
+            // 进行乘法以及取模运算
+            result = result.multiply(a);
         }
         return result;
     }

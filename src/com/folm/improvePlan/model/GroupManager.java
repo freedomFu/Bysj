@@ -7,6 +7,7 @@ import java.math.BigInteger;
 
 /**
  * 群管理员
+ * 没必要建立内部类，可以使用列表来建立联系
  * @author folm
  */
 public class GroupManager {
@@ -20,11 +21,14 @@ public class GroupManager {
     // 两个大整数
     private BigInteger eg;
     private BigInteger dg;
+    private GroupCenter gcenter;
 
-    public GroupManager(){
+    public GroupManager(GroupCenter gc){
+        // 传入群中心，然后可以在群成员中使用群中心公布的内容
+        this.gcenter = gc;
         idg = new BigInteger(String.valueOf(System.currentTimeMillis())).pow(2);
-        q3 =  new CreateBigPrime().getPrime(900);
-        q4 =  new CreateBigPrime().getPrime(900);
+        q3 =  new CreateBigPrime().getPrime(500);
+        q4 =  new CreateBigPrime().getPrime(500);
         ng = q3.mod(q4);
         gmfy = q3.subtract(BigInteger.ONE).multiply(q4.subtract(BigInteger.ONE));
         eg = new BigInteger("96907");
@@ -36,8 +40,15 @@ public class GroupManager {
         return res;
     }
 
-    public static void main(String[] args) {
-        GroupManager gm = new GroupManager();
+    public BigInteger getIdg() {
+        return idg;
     }
 
+    public BigInteger getNg() {
+        return ng;
+    }
+
+    public BigInteger getEg() {
+        return eg;
+    }
 }
