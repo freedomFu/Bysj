@@ -32,6 +32,8 @@ public class App {
         System.out.println(String.valueOf(idi));
         gc.getEleCheckNewMemberLegal(idi);
 
+        System.out.println(gman.getWg(idi));
+
 //        System.out.println(gc.getMemberRecordList());
 
     }

@@ -1,6 +1,7 @@
 package com.folm.improvePlan.model;
 
 import com.folm.improvePlan.Utils.CreateBigPrime;
+import com.folm.improvePlan.Utils.Exponentiation;
 import com.folm.improvePlan.Utils.GCD;
 
 import java.math.BigInteger;
@@ -33,6 +34,19 @@ public class GroupManager {
         gmfy = q3.subtract(BigInteger.ONE).multiply(q4.subtract(BigInteger.ONE));
         eg = new BigInteger("96907");
         dg = new GCD().getInverseEle(eg, gmfy);
+    }
+
+    /**
+     * 获取 wg
+     * @return
+     */
+    public BigInteger getWg(BigInteger idi){
+        BigInteger[] dataFromCenter = gcenter.getEleCheckNewMemberLegal(idi);
+        BigInteger rc = dataFromCenter[1];
+        BigInteger yc = gcenter.getYc();
+
+        BigInteger base = idg.multiply(rc).multiply(new Exponentiation().expMode(yc,rc.multiply(GroupCenter.MyHash(String.valueOf(idi))),ng)).multiply(idi).mod(ng);
+        return base;
     }
 
     public BigInteger[] getGroupManagerInfo(){

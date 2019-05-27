@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" line="36" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" line="38" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b589ad7-cfcc-46b4-a986-81f3a5c9add1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/Utils/BinaryTree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/Utils/Tree.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/controller/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/controller/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter$Subtree$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter$Subtree$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter$Subtree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter$Subtree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/Utils/BinaryTree.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/Utils/Exponentiation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/improvePlan/Utils/Exponentiation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/Utils/Tree.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -48,27 +37,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="85" column="99" selection-start-line="85" selection-start-column="99" selection-end-line="85" selection-end-column="99" />
+            <state relative-caret-position="239">
+              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2229#2230#0" expanded="true" />
-                <element signature="e#2255#2256#0" expanded="true" />
-                <element signature="e#2287#2288#0" expanded="true" />
-                <element signature="e#2311#2312#0" expanded="true" />
-                <element signature="e#2344#2345#0" expanded="true" />
-                <element signature="e#2369#2370#0" expanded="true" />
-                <element signature="e#2402#2403#0" expanded="true" />
-                <element signature="e#2427#2428#0" expanded="true" />
-                <element signature="e#2460#2461#0" expanded="true" />
-                <element signature="e#2485#2486#0" expanded="true" />
-                <element signature="e#4198#4199#0" expanded="true" />
-                <element signature="e#4237#4238#0" expanded="true" />
-                <element signature="e#3525#3526#0" expanded="true" />
-                <element signature="e#3588#3589#0" expanded="true" />
+                <element signature="e#3421#3422#0" expanded="true" />
+                <element signature="e#3477#3478#0" expanded="true" />
+                <element signature="e#3535#3536#0" expanded="true" />
+                <element signature="e#3593#3594#0" expanded="true" />
+                <element signature="e#3651#3652#0" expanded="true" />
+                <element signature="e#5357#5358#0" expanded="true" />
+                <element signature="e#5546#5547#0" expanded="true" />
                 <element signature="e#5403#5404#0" expanded="true" />
                 <element signature="e#5466#5467#0" expanded="true" />
                 <element signature="e#6509#6510#0" expanded="true" />
@@ -110,15 +92,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/math/BigInteger.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="2140" column="59" lean-forward="true" selection-start-line="2140" selection-start-column="59" selection-end-line="2140" selection-end-column="59" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/GCD.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="310">
@@ -127,11 +100,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+            <state relative-caret-position="462">
+              <caret line="34" column="44" lean-forward="true" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -142,15 +115,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
+            <state relative-caret-position="402">
+              <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
               <folding>
-                <element signature="e#1036#1037#0" expanded="true" />
-                <element signature="e#1062#1063#0" expanded="true" />
-                <element signature="e#1095#1096#0" expanded="true" />
-                <element signature="e#1120#1121#0" expanded="true" />
-                <element signature="e#1153#1154#0" expanded="true" />
-                <element signature="e#1178#1179#0" expanded="true" />
+                <element signature="e#1225#1226#0" expanded="true" />
+                <element signature="e#1251#1252#0" expanded="true" />
+                <element signature="e#1284#1285#0" expanded="true" />
+                <element signature="e#1309#1310#0" expanded="true" />
+                <element signature="e#1342#1343#0" expanded="true" />
+                <element signature="e#1367#1368#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -229,9 +202,9 @@
         <option value="$PROJECT_DIR$/src/com/folm/improvePlan/Utils/KnowledgeSinature.java" />
         <option value="$PROJECT_DIR$/src/com/folm/improvePlan/Utils/Exponentiation.java" />
         <option value="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupMember.java" />
+        <option value="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java" />
         <option value="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java" />
         <option value="$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" />
-        <option value="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java" />
       </list>
     </option>
   </component>
@@ -310,7 +283,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="375" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558919377639" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558921265482" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -438,12 +411,12 @@
       <workItem from="1558523892085" duration="615000" />
       <workItem from="1558658501800" duration="8207000" />
       <workItem from="1558742000302" duration="16476000" />
-      <workItem from="1558825995849" duration="39960000" />
+      <workItem from="1558825995849" duration="41852000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="202055000" />
+    <option name="totallyTimeSpent" value="203947000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -799,20 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/math/BigInteger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="2140" column="59" lean-forward="true" selection-start-line="2140" selection-start-column="59" selection-end-line="2140" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/Exponentiation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="46" column="104" lean-forward="true" selection-start-line="46" selection-start-column="104" selection-end-line="46" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/KnowledgeSinature.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
@@ -820,18 +779,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java">
+    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/GCD.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="30" column="47" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
-          <folding>
-            <element signature="e#1036#1037#0" expanded="true" />
-            <element signature="e#1062#1063#0" expanded="true" />
-            <element signature="e#1095#1096#0" expanded="true" />
-            <element signature="e#1120#1121#0" expanded="true" />
-            <element signature="e#1153#1154#0" expanded="true" />
-            <element signature="e#1178#1179#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="310">
+          <caret line="49" column="44" lean-forward="true" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
         </state>
       </provider>
     </entry>
@@ -846,47 +797,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/GCD.java">
+    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="49" column="44" lean-forward="true" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
+        <state relative-caret-position="239">
+          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="107" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3421#3422#0" expanded="true" />
+            <element signature="e#3477#3478#0" expanded="true" />
+            <element signature="e#3535#3536#0" expanded="true" />
+            <element signature="e#3593#3594#0" expanded="true" />
+            <element signature="e#3651#3652#0" expanded="true" />
+            <element signature="e#5357#5358#0" expanded="true" />
+            <element signature="e#5546#5547#0" expanded="true" />
+            <element signature="e#5403#5404#0" expanded="true" />
+            <element signature="e#5466#5467#0" expanded="true" />
+            <element signature="e#6509#6510#0" expanded="true" />
+            <element signature="e#6558#6559#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-10.0.1/lib/src.zip!/java.base/java/math/BigInteger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="2140" column="59" lean-forward="true" selection-start-line="2140" selection-start-column="59" selection-end-line="2140" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/Exponentiation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="46" column="104" lean-forward="true" selection-start-line="46" selection-start-column="104" selection-end-line="46" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="402">
+          <caret line="48" column="20" selection-start-line="48" selection-start-column="20" selection-end-line="48" selection-end-column="20" />
+          <folding>
+            <element signature="e#1225#1226#0" expanded="true" />
+            <element signature="e#1251#1252#0" expanded="true" />
+            <element signature="e#1284#1285#0" expanded="true" />
+            <element signature="e#1309#1310#0" expanded="true" />
+            <element signature="e#1342#1343#0" expanded="true" />
+            <element signature="e#1367#1368#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+        <state relative-caret-position="462">
+          <caret line="34" column="44" lean-forward="true" selection-start-line="34" selection-start-column="44" selection-end-line="34" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="85" column="99" selection-start-line="85" selection-start-column="99" selection-end-line="85" selection-end-column="99" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2229#2230#0" expanded="true" />
-            <element signature="e#2255#2256#0" expanded="true" />
-            <element signature="e#2287#2288#0" expanded="true" />
-            <element signature="e#2311#2312#0" expanded="true" />
-            <element signature="e#2344#2345#0" expanded="true" />
-            <element signature="e#2369#2370#0" expanded="true" />
-            <element signature="e#2402#2403#0" expanded="true" />
-            <element signature="e#2427#2428#0" expanded="true" />
-            <element signature="e#2460#2461#0" expanded="true" />
-            <element signature="e#2485#2486#0" expanded="true" />
-            <element signature="e#4198#4199#0" expanded="true" />
-            <element signature="e#4237#4238#0" expanded="true" />
-            <element signature="e#3525#3526#0" expanded="true" />
-            <element signature="e#3588#3589#0" expanded="true" />
-            <element signature="e#5403#5404#0" expanded="true" />
-            <element signature="e#5466#5467#0" expanded="true" />
-            <element signature="e#6509#6510#0" expanded="true" />
-            <element signature="e#6558#6559#0" expanded="true" />
           </folding>
         </state>
       </provider>

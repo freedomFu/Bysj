@@ -79,7 +79,7 @@ public class GroupCenter {
         return res;
     }
 
-    public Object[] getEleCheckNewMemberLegal(BigInteger idi){
+    public BigInteger[] getEleCheckNewMemberLegal(BigInteger idi){
         BigInteger alpha = new CreateBigPrime().getPrime(100);
         BigInteger ng = gmanager.getNg();
         BigInteger rc = new Exponentiation().expMode(g,alpha,ng);
@@ -98,7 +98,8 @@ public class GroupCenter {
         System.out.println("=======================================");
         System.out.println(right1);
 
-        return null;
+        BigInteger[] resArr = {idi, rc, g, sc};
+        return resArr;
     }
 
     public BigInteger getIdc() {
