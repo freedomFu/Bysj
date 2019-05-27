@@ -60,10 +60,10 @@ public class GroupCenter {
         yc = new Exponentiation().expMode(g, xc, nc);
         // 计算dc  有点问题
         dc = new GCD().getInverseEle(ec,fy);
-        System.out.println("before:"+dc);
+//        System.out.println("before:"+dc);
         // 创建子树 此时还没有初始化群成员
-//        sbtree.create();
-        System.out.println("after:"+dc);
+        sbtree.create();
+//        System.out.println("after:"+dc);
 //        System.out.println("构造方法");
     }
 
@@ -87,20 +87,36 @@ public class GroupCenter {
 
         BigInteger left = new Exponentiation().expMode(g,sc,ng);
         BigInteger right = rc.multiply(new Exponentiation().expMode(g,rc.multiply(MyHash(String.valueOf(idi))),ng)).mod(ng);
+        boolean flag1 = (left.compareTo(right) == 0)?true:false;
 
-        System.out.println(left);
+        /*System.out.println(left);
         System.out.println("=======================================");
-        System.out.println(right);
+        System.out.println(right);*/
 
         BigInteger left1 = rc.mod(nc);
         BigInteger right1 = new Exponentiation().expMode(rc,dc.multiply(ec),nc);
-        System.out.println(left1);
+        boolean flag2 = (left1.compareTo(right1) == 0)?true:false;
+        /*System.out.println(left1);
         System.out.println("=======================================");
-        System.out.println(right1);
+        System.out.println(right1);*/
 
-        BigInteger[] resArr = {idi, rc, g, sc};
-        return resArr;
+        if(flag1 && flag2){
+            BigInteger[] resArr = {idi, rc, g, sc};
+            return resArr;
+        }else{
+            return null;
+        }
     }
+
+    /**
+     * 通过中国剩余定理 和 完备子树方法 完成C的求解
+     * @return
+     */
+    public BigInteger getCRTC(){
+        return null;
+    }
+
+
 
     public BigInteger getIdc() {
         return idc;

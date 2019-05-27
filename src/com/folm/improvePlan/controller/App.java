@@ -1,5 +1,6 @@
 package com.folm.improvePlan.controller;
 
+import com.folm.improvePlan.Utils.CreateBigPrime;
 import com.folm.improvePlan.Utils.Exponentiation;
 import com.folm.improvePlan.model.GroupCenter;
 import com.folm.improvePlan.model.GroupManager;
@@ -17,24 +18,26 @@ public class App {
         GroupManager gman = new GroupManager(gc);
         System.out.println(Arrays.toString(gman.getGroupManagerInfo()));
 
-//        gc.addMember();
-//        gc.addMember();
-//        gc.addMember();
-//
-//        GroupMember gm = gc.getMemberRecordList().get(1);
-//        BigInteger idi = gm.getIdi();
+        gc.addMember();
+        gc.addMember();
+        gc.addMember();
 
-        BigInteger g = gc.getG();
-        BigInteger k = new BigInteger("5");
-        BigInteger idi = new Exponentiation().expMode(g,k);
+        GroupMember gm = gc.getMemberRecordList().get(1);
+        BigInteger idi = gm.getIdi();
+        BigInteger[] res = gc.getEleCheckNewMemberLegal(idi);
+        System.out.println(Arrays.toString(res));
+        BigInteger rc = res[1];
+        BigInteger wg = gman.getWg(idi, rc);
+        System.out.println("wg的值为："+wg);
+        boolean flag = gm.isLegal(rc);
+        if(flag){
+            System.out.println("成功！");
+        }else{
+            System.out.println("失败");
+        }
 
-        System.out.println(idi);
-        System.out.println(String.valueOf(idi));
-        gc.getEleCheckNewMemberLegal(idi);
 
-        System.out.println(gman.getWg(idi));
-
-//        System.out.println(gc.getMemberRecordList());
+        System.out.println("执行结束");
 
     }
 

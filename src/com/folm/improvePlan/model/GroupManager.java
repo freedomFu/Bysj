@@ -30,23 +30,21 @@ public class GroupManager {
         idg = new BigInteger(String.valueOf(System.currentTimeMillis())).pow(2);
         q3 =  new CreateBigPrime().getPrime(500);
         q4 =  new CreateBigPrime().getPrime(500);
-        ng = q3.mod(q4);
+        ng = q3.multiply(q4);
         gmfy = q3.subtract(BigInteger.ONE).multiply(q4.subtract(BigInteger.ONE));
         eg = new BigInteger("96907");
-        dg = new GCD().getInverseEle(eg, gmfy);
+        dg = new GCD().getInverseEle(eg, gmfy); // 这里有小问题
     }
 
     /**
      * 获取 wg
      * @return
      */
-    public BigInteger getWg(BigInteger idi){
-        BigInteger[] dataFromCenter = gcenter.getEleCheckNewMemberLegal(idi);
-        BigInteger rc = dataFromCenter[1];
+    public BigInteger getWg(BigInteger idi, BigInteger rc){
         BigInteger yc = gcenter.getYc();
-
-        BigInteger base = idg.multiply(rc).multiply(new Exponentiation().expMode(yc,rc.multiply(GroupCenter.MyHash(String.valueOf(idi))),ng)).multiply(idi).mod(ng);
-        return base;
+        BigInteger base = idg.multiply(rc).multiply(new Exponentiation().expMode(yc,rc.multiply(GroupCenter.MyHash(String.valueOf(idi))),ng)).multiply(idi);
+        BigInteger wg = new Exponentiation().expMode(base, dg.negate(), ng);
+        return wg;
     }
 
     public BigInteger[] getGroupManagerInfo(){
