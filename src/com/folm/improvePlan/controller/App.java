@@ -36,6 +36,8 @@ public class App {
             System.out.println("失败");
         }
 
+        System.out.println(gc.getCRTC());
+
 
         System.out.println("执行结束");
 

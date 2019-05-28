@@ -6,7 +6,6 @@ import com.folm.improvePlan.Utils.KnowledgeSinature;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 群成员类
@@ -31,6 +30,10 @@ public class GroupMember {
         delta = new KnowledgeSinature().spk(idi, g);
         this.xy = xy;
         this.recordList= recordList;
+    }
+
+    public int[] getXy() {
+        return xy;
     }
 
     public BigInteger getIdi() {

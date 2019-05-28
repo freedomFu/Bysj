@@ -1,5 +1,6 @@
 package com.folm.improvePlan.model;
 
+import com.folm.improvePlan.Utils.CRT;
 import com.folm.improvePlan.Utils.CreateBigPrime;
 import com.folm.improvePlan.Utils.Exponentiation;
 import com.folm.improvePlan.Utils.GCD;
@@ -8,6 +9,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -113,10 +115,63 @@ public class GroupCenter {
      * @return
      */
     public BigInteger getCRTC(){
-        return null;
+
+        ArrayList<Integer> siList = this.getSi();
+        List<BigInteger> ylist = new ArrayList<>();
+        List<BigInteger> plist = new ArrayList<>();
+        int size = siList.size();
+
+        for(int i=0;i<size;i++){
+            int num = siList.get(i);
+            Object[] res = sbtree.getMemberRecordData(num);
+            BigInteger yk = (BigInteger) res[2];
+            BigInteger pk = (BigInteger) res[3];
+            ylist.add(yk);
+            plist.add(pk);
+        }
+        return new CRT().getRes(ylist, plist);
     }
 
-
+    /**
+     * 获取集合
+     * 如果是奇数 就判断下一个是不是相邻的那个偶数
+     * 如果是偶数 就 直接存储
+     * @return
+     */
+    private ArrayList<Integer> getSi(){
+        int size = memberRecordList.size();
+        ArrayList<Integer> leafNode = new ArrayList<>();
+        ArrayList<Integer> siNode  = new ArrayList<>();
+        for(int i=0;i<size;i++){
+            GroupMember gm = memberRecordList.get(i);
+            int[] xy = gm.getXy();
+            int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
+            leafNode.add(num);
+        }
+        int len = leafNode.size();
+        // 处理得到si对应的值
+        for(int i=0;i<len;i++){
+            int ele = leafNode.get(i);
+            // 如果是奇数
+            if(ele%2 != 0){
+                if(i==len-1){
+                    siNode.add(ele);
+                    break;
+                }
+                int nextele = leafNode.get(i+1);
+                if(nextele-ele == 1){
+                    int parent = (ele+1)/2 - 1;
+                    siNode.add(parent);
+                    i++;
+                }else{
+                    siNode.add(ele);
+                }
+            }else{
+                siNode.add(ele);
+            }
+        }
+        return siNode;
+    }
 
     public BigInteger getIdc() {
         return idc;
