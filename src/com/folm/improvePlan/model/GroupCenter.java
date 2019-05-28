@@ -115,7 +115,6 @@ public class GroupCenter {
      * @return
      */
     public BigInteger getCRTC(){
-
         ArrayList<Integer> siList = this.getSi();
         List<BigInteger> ylist = new ArrayList<>();
         List<BigInteger> plist = new ArrayList<>();
@@ -130,6 +129,20 @@ public class GroupCenter {
             plist.add(pk);
         }
         return new CRT().getRes(ylist, plist);
+    }
+
+    /**
+     * 群成员撤销
+     * @param groupMember
+     */
+    public void revokeMember(GroupMember groupMember){
+        int[] xy = groupMember.getXy();
+        BigInteger idi = groupMember.getIdi();
+        int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
+        int index = num-((int)Math.pow(2,xy[0])-1);
+        System.out.println("这是列表中的元素，小标为："+index);
+        memberRecordList.remove(index);
+        // 接下来要重新计算C
     }
 
     /**

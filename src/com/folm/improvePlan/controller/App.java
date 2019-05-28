@@ -37,6 +37,10 @@ public class App {
         }
 
         System.out.println(gc.getCRTC());
+        GroupMember gm1 = gc.getMemberRecordList().get(2);
+        gc.revokeMember(gm1);
+
+        System.out.println(gc.getCRTC());
 
 
         System.out.println("执行结束");

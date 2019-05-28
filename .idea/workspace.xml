@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" line="43" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" line="47" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b589ad7-cfcc-46b4-a986-81f3a5c9add1" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/controller/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/controller/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter$Subtree$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter$Subtree$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter$Subtree.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter$Subtree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupCenter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupMember.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Bysj/com/folm/improvePlan/model/GroupMember.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupMember.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupMember.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,14 +35,14 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.59190375">
+    <splitter split-orientation="horizontal" split-proportion="0.49413645">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="170">
-                  <caret line="116" column="32" lean-forward="true" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
+                <state relative-caret-position="408">
+                  <caret line="143" column="39" lean-forward="true" selection-start-line="143" selection-start-column="39" selection-end-line="143" selection-end-column="39" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#4349#4375#1" />
@@ -76,10 +69,11 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupMember.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="22">
-                  <caret line="35" selection-start-line="35" selection-end-line="35" />
+                <state relative-caret-position="594">
+                  <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
                   <folding>
                     <element signature="imports" expanded="true" />
+                    <element signature="e#1006#1007#0" expanded="true" />
                     <element signature="e#1031#1032#0" expanded="true" />
                   </folding>
                 </state>
@@ -98,29 +92,17 @@
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/GCD.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1078">
+                <state relative-caret-position="310">
                   <caret line="49" column="44" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
                 </state>
               </provider>
             </entry>
           </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="204">
-                  <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
-                  <folding>
-                    <element signature="imports" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
+          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="924">
-                  <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+                <state relative-caret-position="390">
+                  <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
                 </state>
               </provider>
             </entry>
@@ -129,17 +111,29 @@
       </split-first>
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
+          <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupMember.java">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="436">
-                  <caret line="40" column="5" lean-forward="true" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
+                <state relative-caret-position="304">
+                  <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
                   <folding>
                     <element signature="imports" expanded="true" />
                     <element signature="e#1006#1007#0" expanded="true" />
                     <element signature="e#1031#1032#0" expanded="true" />
                     <element signature="e#1065#1066#0" expanded="true" />
                     <element signature="e#1091#1092#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="192">
+                  <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+                  <folding>
+                    <element signature="imports" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -300,7 +294,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.WIDTH" value="375" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558965585826" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1559014523531" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -429,12 +423,12 @@
       <workItem from="1558658501800" duration="8207000" />
       <workItem from="1558742000302" duration="16476000" />
       <workItem from="1558825995849" duration="57320000" />
-      <workItem from="1559003659947" duration="4299000" />
+      <workItem from="1559003659947" duration="6269000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="223714000" />
+    <option name="totallyTimeSpent" value="225684000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
@@ -799,45 +793,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/GCD.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1078">
-          <caret line="49" column="44" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="924">
-          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupMember.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="304">
+          <caret line="31" column="36" lean-forward="true" selection-start-line="31" selection-start-column="36" selection-end-line="31" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1006#1007#0" expanded="true" />
             <element signature="e#1031#1032#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1065#1066#0" expanded="true" />
+            <element signature="e#1091#1092#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupCenter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="116" column="32" lean-forward="true" selection-start-line="116" selection-start-column="32" selection-end-line="116" selection-end-column="32" />
+        <state relative-caret-position="408">
+          <caret line="143" column="39" lean-forward="true" selection-start-line="143" selection-start-column="39" selection-end-line="143" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4349#4375#1" />
@@ -847,6 +820,30 @@
             <element signature="e#6267#6268#0" expanded="true" />
             <element signature="e#6401#6402#0" expanded="true" />
             <element signature="e#6456#6457#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/Utils/GCD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="310">
+          <caret line="49" column="44" selection-start-line="49" selection-start-column="44" selection-end-line="49" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/model/GroupManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="60" column="5" lean-forward="true" selection-start-line="60" selection-start-column="5" selection-end-line="60" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/folm/improvePlan/controller/App.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
