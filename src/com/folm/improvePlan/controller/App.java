@@ -23,6 +23,7 @@ public class App {
         gc.addMember();
 
         GroupMember gm = gc.getMemberRecordList().get(1);
+        gm.getCertificate();
         BigInteger idi = gm.getIdi();
         BigInteger[] res = gc.getEleCheckNewMemberLegal(idi);
         System.out.println(Arrays.toString(res));

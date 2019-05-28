@@ -32,6 +32,23 @@ public class GroupMember {
         this.recordList= recordList;
     }
 
+    /**
+     * 群成员获取自己的成员证书
+     * @return
+     */
+    public Object[] getCertificate(){
+        // 获取 rc sc
+        BigInteger[] rcSc = gcenter.getEleCheckNewMemberLegal(idi);
+        BigInteger rc = rcSc[1];
+        BigInteger sc = rcSc[3];
+        BigInteger wg = gman.getWg(idi, rc);
+        int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
+
+        Object[] res = {rc, sc, wg, recordList};
+
+        return res;
+    }
+
     public int[] getXy() {
         return xy;
     }

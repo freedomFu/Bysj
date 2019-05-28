@@ -9,7 +9,6 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,6 +33,7 @@ public class GroupCenter {
     private BigInteger yc;
     private BigInteger ec;
     private BigInteger dc;
+    private BigInteger alpha;
     private int[] defaultData = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     private Subtree sbtree = new Subtree(defaultData);
     private List<GroupMember> memberRecordList = new ArrayList<>();
@@ -62,6 +62,8 @@ public class GroupCenter {
         yc = new Exponentiation().expMode(g, xc, nc);
         // 计算dc  有点问题
         dc = new GCD().getInverseEle(ec,fy);
+        // 计算 alpha
+        alpha = new CreateBigPrime().getPrime(100);
 //        System.out.println("before:"+dc);
         // 创建子树 此时还没有初始化群成员
         sbtree.create();
@@ -82,7 +84,6 @@ public class GroupCenter {
     }
 
     public BigInteger[] getEleCheckNewMemberLegal(BigInteger idi){
-        BigInteger alpha = new CreateBigPrime().getPrime(100);
         BigInteger ng = gmanager.getNg();
         BigInteger rc = new Exponentiation().expMode(g,alpha,ng);
         BigInteger sc = alpha.add((rc.multiply(MyHash(String.valueOf(idi)))));//删除了xc ，试一试 剩下的能不能解决
@@ -375,8 +376,6 @@ public class GroupCenter {
             }
             return res;
         }
-
-
 
         /**
          * 子节点
