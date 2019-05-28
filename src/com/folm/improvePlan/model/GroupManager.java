@@ -63,4 +63,27 @@ public class GroupManager {
     public BigInteger getEg() {
         return eg;
     }
+
+    /**
+     * 验证签名
+     * @param sign
+     * @return
+     */
+    public boolean checkSign(Object[] sign){
+        BigInteger pk = (BigInteger)sign[5];
+        BigInteger dc = (BigInteger)sign[6];
+        BigInteger c = gcenter.getCRTC();
+        BigInteger ec = gcenter.getEc();
+        BigInteger nc = gcenter.getNc();
+        BigInteger right1 = new Exponentiation().expMode(pk,dc.multiply(ec),nc);
+        boolean f1 = (pk.compareTo(right1)==0)?true:false;
+        BigInteger yt =c.mod(pk);
+        BigInteger z1p = 
+
+        return true;
+
+
+    }
+
+
 }

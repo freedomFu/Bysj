@@ -36,17 +36,47 @@ public class GroupMember {
      * 群成员获取自己的成员证书
      * @return
      */
-    public Object[] getCertificate(){
+    private Object[] getCertificate(){
         // 获取 rc sc
         BigInteger[] rcSc = gcenter.getEleCheckNewMemberLegal(idi);
         BigInteger rc = rcSc[1];
         BigInteger sc = rcSc[3];
         BigInteger wg = gman.getWg(idi, rc);
-        int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
-
         Object[] res = {rc, sc, wg, recordList};
-
         return res;
+    }
+
+    public Object[] signMsg(String msg){
+        Object[] res = getCertificate();
+        BigInteger rc = (BigInteger)res[0];
+        BigInteger sc = (BigInteger)res[1];
+        BigInteger wg = (BigInteger)res[2];
+        BigInteger c = gcenter.getCRTC();
+        BigInteger beta1 = new CreateBigPrime().getPrime(100);
+        BigInteger beta2 = new CreateBigPrime().getPrime(100);
+        BigInteger hashmsg = GroupCenter.MyHash(msg);
+        BigInteger g = gcenter.getG();
+        BigInteger nc = gcenter.getNc();
+        BigInteger eg = gman.getEg();
+        BigInteger ng = gman.getNg();
+        BigInteger z1 = new Exponentiation().expMode(g, hashmsg, nc);
+        BigInteger z2 = (new Exponentiation().expMode(beta2,eg,ng)).multiply(new Exponentiation().expMode(g,beta1,ng)).mod(ng);
+        String mix = z1+msg+z2;
+        BigInteger u = GroupCenter.MyHash(mix);
+        BigInteger r1 = beta1.add(u.multiply(k.add(sc)).mod(ng));
+        BigInteger r2 = beta2.multiply(new Exponentiation().expMode(wg,u,ng)).mod(ng);
+        int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
+        Object[] oarray = gcenter.getRecord(num);
+        BigInteger xk = (BigInteger)oarray[5];
+        BigInteger pk = (BigInteger)oarray[3];
+        BigInteger dc = (BigInteger)oarray[6];
+        BigInteger r3 = new Exponentiation().expMode(g, xk.multiply(GroupCenter.MyHash(msg)),nc);
+        Object[] signRes = {msg,u,r1,r2,r3,pk,dc};
+
+        System.out.println("z1:"+z1);
+        System.out.println("z2:"+z2);
+
+        return signRes;
     }
 
     public int[] getXy() {

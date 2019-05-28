@@ -274,6 +274,10 @@ public class GroupCenter {
         return Math.log(value) / Math.log(base);
     }
 
+    public Object[] getRecord(int index){
+        return sbtree.getMemberRecordData(index);
+    }
+
     /**
      * 内部类 创建子树
      * 这里创建的实际上是 满二叉树
@@ -307,7 +311,7 @@ public class GroupCenter {
                 pk = new CreateBigPrime().getPrime(110);
                 gxk = new Exponentiation().expMode(g, xk, fy);
                 pkdc = new Exponentiation().expMode(pk, dc, fy);
-                Object[] recordData = {coord, gxk, yk, pk, pkdc};
+                Object[] recordData = {coord, gxk, yk, pk, pkdc, xk, dc};
                 nodes.add(new Node(recordData, datas[i]));
             }
             // 如果父节点编号为x，那么左子节点的编号是2x，右子节点的编号是2x+1
