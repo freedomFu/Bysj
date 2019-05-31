@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class GroupMember {
     private BigInteger k;
-    private BigInteger idi;
+    private BigInteger[] idi;
     private GroupCenter gcenter;
     private GroupManager gman;
     private BigInteger delta; //知识签名
@@ -35,7 +35,7 @@ public class GroupMember {
         gman = new GroupManager(gc);
         k = new CreateBigPrime().getPrime(100);
         BigInteger g = gc.getG();
-        idi = new Exponentiation().expMode(g,k,gman.getNg());
+        idi = new Exponentiation().expMode(g,k);
         delta = new KnowledgeSinature().spk(idi, g);
         this.xy = xy;
         this.recordList= recordList;
@@ -55,7 +55,7 @@ public class GroupMember {
      * 群成员获取自己的成员证书
      * @return
      */
-    private Object[] getCertificate(){
+    /*private Object[] getCertificate(){
         // 获取 rc sc
         BigInteger[] rcSc = gcenter.getEleCheckNewMemberLegal(idi);
         BigInteger rc = rcSc[1];
@@ -96,28 +96,36 @@ public class GroupMember {
         System.out.println("z2:"+z2);
 
         return signRes;
-    }
+    }*/
 
     public int[] getXy() {
         return xy;
     }
 
-    public BigInteger getIdi() {
+    public BigInteger[] getIdi() {
         return idi;
     }
 
-    public boolean isLegal(BigInteger rc){
-        BigInteger wg = gman.getWg(idi,rc);
+    public boolean isLegal(){
+        BigInteger[] wgarr = gman.getWg(idi);
+        BigInteger rc = gcenter.getRc(idi);
+        BigInteger wgbase = wgarr[0];
+        BigInteger wgexponent = wgarr[1];
         BigInteger eg = gman.getEg();
         BigInteger ng = gman.getNg();
+        BigInteger idis = new Exponentiation().expMode(idi[0],idi[1],ng);
+        BigInteger hashMsg = GroupCenter.MyHash(String.valueOf(idis));
         BigInteger yc = gcenter.getYc();
         BigInteger idg = gman.getIdg();
-        BigInteger left = new Exponentiation().expMode(wg,eg.negate(),ng).mod(ng);
-        BigInteger right = idg.multiply(rc).multiply(new Exponentiation().expMode(yc, rc.multiply(GroupCenter.MyHash(String.valueOf(idi))),ng)).mod(ng);
+        BigInteger left = new Exponentiation().expMode(wgbase,eg.negate().multiply(wgexponent),ng).mod(ng);
+        System.out.println(left);
+        System.out.println("============是不是？？？======================");
+        BigInteger right = idg.multiply(rc).multiply(new Exponentiation().expMode(yc, rc.multiply(hashMsg),ng)).multiply(idis).mod(ng);
+        System.out.println(right);
         // 无法解决的双重大整数求幂模
         if(left.compareTo(right) == 0){
             return true;
         }
-        return true;
+        return false;
     }
 }

@@ -42,6 +42,18 @@ public class Exponentiation {
         return a_w_b.mod(n);
     }
 
+    /**
+     * 对于无法计算的量可以暂时保存
+     * @param base
+     * @param exponent
+     * @param n
+     * @return
+     */
+    public BigInteger[] expModeArr(BigInteger base, BigInteger exponent, BigInteger n){
+        BigInteger[] res = {base, exponent, n};
+        return res;
+    }
+
     public BigInteger[] expMode(BigInteger base, BigInteger exponent){
         BigInteger[] res = {base, exponent};
         return res;

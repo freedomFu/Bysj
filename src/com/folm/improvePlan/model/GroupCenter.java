@@ -81,25 +81,63 @@ public class GroupCenter {
         return res;
     }
 
-    public BigInteger[] getEleCheckNewMemberLegal(BigInteger idi){
+    /**
+     * 验证群中心是否合法
+     * @param idi
+     * @return
+     */
+    public Object[] getEleCheckNewMemberLegal(BigInteger[] idi){
         BigInteger ng = gmanager.getNg();
+        BigInteger hashMsg = GroupCenter.MyHash(String.valueOf(new Exponentiation().expMode(idi[0],idi[1],ng)));
         BigInteger rc = new Exponentiation().expMode(g,alpha,ng);
-        BigInteger sc = alpha.add((rc.multiply(MyHash(String.valueOf(idi)))));//删除了xc ，试一试 剩下的能不能解决
+        BigInteger sc = alpha.add((rc.multiply(hashMsg)));//删除了xc ，试一试 剩下的能不能解决
 
         BigInteger left = new Exponentiation().expMode(g,sc,ng);
-        BigInteger right = rc.multiply(new Exponentiation().expMode(g,rc.multiply(MyHash(String.valueOf(idi))),ng)).mod(ng);
+        BigInteger right = rc.multiply(new Exponentiation().expMode(g,rc.multiply(hashMsg),ng)).mod(ng);
+        /*System.out.println(left);
+        System.out.println("==================");
+        System.out.println(right);*/
         boolean flag1 = (left.compareTo(right) == 0)?true:false;
 
         BigInteger left1 = rc.mod(nc);
         BigInteger right1 = new Exponentiation().expMode(rc,dc.multiply(ec),nc);
+        /*System.out.println(left1);
+        System.out.println("==================");
+        System.out.println(right1);*/
         boolean flag2 = (left1.compareTo(right1) == 0)?true:false;
-
+        BigInteger[] gsc = {g,sc};
         if(flag1 && flag2){
-            BigInteger[] resArr = {idi, rc, g, sc};
+            Object[] resArr = {idi, rc, gsc};
             return resArr;
         }else{
             return null;
         }
+    }
+
+    /**
+     * 获取rc
+     * @param idi
+     * @return
+     */
+    public BigInteger getRc(BigInteger[] idi){
+        Object[] res = getEleCheckNewMemberLegal(idi);
+        BigInteger rc = (BigInteger)res[1];
+        return rc;
+    }
+
+    /**
+     * 检验用户是不是合法
+     * @param idi
+     * @return
+     */
+    public boolean checkValue(BigInteger[] idi){
+        Object[] s = this.getEleCheckNewMemberLegal(idi);
+
+        if(null!=s){
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -127,7 +165,7 @@ public class GroupCenter {
      * 群成员撤销
      * @param groupMember
      */
-    public void revokeMember(GroupMember groupMember){
+    /*public void revokeMember(GroupMember groupMember){
         int[] xy = groupMember.getXy();
         BigInteger idi = groupMember.getIdi();
         int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
@@ -135,7 +173,7 @@ public class GroupCenter {
         System.out.println("这是列表中的元素，小标为："+index);
         memberRecordList.remove(index);
         // 接下来要重新计算C
-    }
+    }*/
 
     /**
      * 获取集合

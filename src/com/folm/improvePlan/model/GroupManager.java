@@ -42,11 +42,18 @@ public class GroupManager {
      * 获取 wg
      * @return
      */
-    public BigInteger getWg(BigInteger idi, BigInteger rc){
+    public BigInteger[] getWg(BigInteger[] idi){
+        Object[] getInfoFromlegalCenter = gcenter.getEleCheckNewMemberLegal(idi);
+        BigInteger rc = (BigInteger) getInfoFromlegalCenter[1];
+        BigInteger idis = new Exponentiation().expMode(idi[0],idi[1],ng);
+        BigInteger hashMsg = GroupCenter.MyHash(String.valueOf(idis));
+        // 获取 g 和 sc
+        BigInteger g = ((BigInteger[]) getInfoFromlegalCenter[2])[0];
+        BigInteger sc = ((BigInteger[]) getInfoFromlegalCenter[2])[1];
         BigInteger yc = gcenter.getYc();
-        BigInteger base = idg.multiply(rc).multiply(new Exponentiation().expMode(yc,rc.multiply(GroupCenter.MyHash(String.valueOf(idi))),ng)).multiply(idi);
-        BigInteger wg = new Exponentiation().expMode(base, dg.negate(), ng);
-        return wg;
+        BigInteger base = idg.multiply(rc).multiply(new Exponentiation().expMode(yc,rc.multiply(hashMsg),ng)).multiply(idis).mod(ng);
+        BigInteger[] wgArr = new Exponentiation().expModeArr(base, dg.negate(), ng);
+        return wgArr;
     }
 
     public BigInteger[] getGroupManagerInfo(){
@@ -104,7 +111,7 @@ public class GroupManager {
      * 群管理员 获取成员信息
      * @return
      */
-    private ArrayList<BigInteger[]> getMemberList(){
+    /*private ArrayList<BigInteger[]> getMemberList(){
         ArrayList<BigInteger[]> memberList = new ArrayList<>();
         List<GroupMember> gmlist = gcenter.getMemberRecordList();
         BigInteger g = gcenter.getG();
@@ -120,14 +127,14 @@ public class GroupManager {
             memberList.add(res);
         }
         return memberList;
-    }
+    }*/
 
     /**
      * 揭露用户
      * @param sign
      * @return
      */
-    public BigInteger showSignMemberidi(Object[] sign){
+    /*public BigInteger showSignMemberidi(Object[] sign){
         ArrayList<BigInteger[]> memberList = this.getMemberList();
         int size = memberList.size();
         String msg = (String)sign[0];
@@ -158,5 +165,5 @@ public class GroupManager {
             }
         }
         return BigInteger.ZERO;
-    }
+    }*/
 }
