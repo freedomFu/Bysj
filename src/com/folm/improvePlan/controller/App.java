@@ -7,6 +7,7 @@ import com.folm.improvePlan.model.GroupManager;
 import com.folm.improvePlan.model.GroupMember;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class App {
@@ -23,6 +24,11 @@ public class App {
         gc.addMember();
 
         GroupMember gm = gc.getMemberRecordList().get(1);
+
+        System.out.println(gc.getSi());
+
+        ArrayList<Object[]> list = gm.getPathNodeList();
+        System.out.println(list);
         BigInteger idi = gm.getIdi();
         BigInteger[] res = gc.getEleCheckNewMemberLegal(idi);
         System.out.println(Arrays.toString(res));

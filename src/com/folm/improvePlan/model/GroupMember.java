@@ -20,6 +20,15 @@ public class GroupMember {
     private int[] xy;// 坐标
     private ArrayList<Object[]> recordList;
 
+    /**
+     * 根据坐标返回对应索引
+     * @return
+     */
+    private int getNum(){
+        int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
+        return num;
+    }
+
     public GroupMember(GroupCenter gc, int[] xy, ArrayList<Object[]> recordList){
         // 传入群中心，然后可以在群成员中使用群中心公布的内容
         this.gcenter = gc;
@@ -30,6 +39,16 @@ public class GroupMember {
         delta = new KnowledgeSinature().spk(idi, g);
         this.xy = xy;
         this.recordList= recordList;
+    }
+
+    /**
+     * 用户获取自身的路径上的节点路径
+     * @return
+     */
+    public ArrayList<Object[]> getPathNodeList(){
+        int num = getNum();
+        ArrayList<Object[]> arrayList = (ArrayList<Object[]>)gcenter.getPathNodeList(num)[1];
+        return arrayList;
     }
 
     /**
@@ -65,7 +84,7 @@ public class GroupMember {
         BigInteger u = GroupCenter.MyHash(mix);
         BigInteger r1 = beta1.add(u.multiply(k.add(sc)).mod(ng));
         BigInteger r2 = beta2.multiply(new Exponentiation().expMode(wg,u,ng)).mod(ng);
-        int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
+        int num = this.getNum();
         Object[] oarray = gcenter.getRecord(num);
         BigInteger xk = (BigInteger)oarray[5];
         BigInteger pk = (BigInteger)oarray[3];

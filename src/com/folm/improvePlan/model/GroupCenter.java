@@ -5,6 +5,7 @@ import com.folm.improvePlan.Utils.CreateBigPrime;
 import com.folm.improvePlan.Utils.Exponentiation;
 import com.folm.improvePlan.Utils.GCD;
 
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,7 +16,7 @@ import java.util.List;
 /**
  * 群中心
  * 群中心的类，完成群中心的一系列操作
- * 群中心的初始化 生成ID 大素数 以及 声明 哈希函数
+ * 群中心的初始化 生成IDc 大素数 以及 声明 哈希函数
  * 完成 完全二叉树的设计
  * 后续内容要放到 添加群成员操作之后才能完成
  * 把 每个用户的信息 给每个用户获取
@@ -60,15 +61,12 @@ public class GroupCenter {
         ec = new BigInteger("65537");
         // 生成yc
         yc = new Exponentiation().expMode(g, xc, nc);
-        // 计算dc  有点问题
+        // 计算dc
         dc = new GCD().getInverseEle(ec,fy);
         // 计算 alpha
         alpha = new CreateBigPrime().getPrime(100);
-//        System.out.println("before:"+dc);
         // 创建子树 此时还没有初始化群成员
         sbtree.create();
-//        System.out.println("after:"+dc);
-//        System.out.println("构造方法");
     }
 
     /**
@@ -92,16 +90,9 @@ public class GroupCenter {
         BigInteger right = rc.multiply(new Exponentiation().expMode(g,rc.multiply(MyHash(String.valueOf(idi))),ng)).mod(ng);
         boolean flag1 = (left.compareTo(right) == 0)?true:false;
 
-        /*System.out.println(left);
-        System.out.println("=======================================");
-        System.out.println(right);*/
-
         BigInteger left1 = rc.mod(nc);
         BigInteger right1 = new Exponentiation().expMode(rc,dc.multiply(ec),nc);
         boolean flag2 = (left1.compareTo(right1) == 0)?true:false;
-        /*System.out.println(left1);
-        System.out.println("=======================================");
-        System.out.println(right1);*/
 
         if(flag1 && flag2){
             BigInteger[] resArr = {idi, rc, g, sc};
@@ -152,7 +143,7 @@ public class GroupCenter {
      * 如果是偶数 就 直接存储
      * @return
      */
-    private ArrayList<Integer> getSi(){
+    public ArrayList<Integer> getSi(){
         int size = memberRecordList.size();
         ArrayList<Integer> leafNode = new ArrayList<>();
         ArrayList<Integer> siNode  = new ArrayList<>();
@@ -231,6 +222,30 @@ public class GroupCenter {
     }
 
     /**
+     * 重载哈希函数，传入三个参数
+     * @param msg
+     * @return
+     */
+    public static BigInteger MyHash(BigInteger z1, BigInteger z2, String msg){
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            String m = z1+msg+z2;
+            byte[] bytes = md.digest(m.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        }catch (NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+
+        BigInteger res = new BigInteger(generatedPassword, 16);
+        return res;
+    }
+
+    /**
      * 成员加入
      * @return
      */
@@ -256,7 +271,6 @@ public class GroupCenter {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -279,6 +293,27 @@ public class GroupCenter {
     }
 
     /**
+     * 返回用户需要的信息
+     * @return
+     */
+    public Object[] getPathNodeList(int num){
+        ArrayList<Object[]> pathNodeListRecord = new ArrayList<>();
+        ArrayList<Integer> nodeList = sbtree.getPathByLeafNode(num);
+        int[] xy = sbtree.getXY(num);
+        int size = nodeList.size();
+        for(int i=0;i<size;i++){
+            int index = nodeList.get(i);
+            Object[] recordList = sbtree.getMemberRecordData(index);
+            Object[] newArr = {recordList[1],recordList[2],recordList[3],recordList[4]};
+            pathNodeListRecord.add(newArr);
+        }
+
+        Object[] res = {xy, pathNodeListRecord};
+
+        return res;
+    }
+
+    /**
      * 内部类 创建子树
      * 这里创建的实际上是 满二叉树
      * 应该根据注册的用户数目来创建的
@@ -294,14 +329,17 @@ public class GroupCenter {
             this.num = this.datas.length;
         }
 
+        /**
+         * 创建二叉树的每一个节点
+         */
         public void create() {
             nodes = new LinkedList<>();
             int[] coord;
             BigInteger yk;
             BigInteger xk;
             BigInteger pk;
-            BigInteger gxk;
-            BigInteger pkdc;
+            BigInteger[] gxk;
+            BigInteger[] pkdc;
 
             for(int i=0;i<this.num;i++) {
                 coord = this.getXY(i);
@@ -309,9 +347,9 @@ public class GroupCenter {
                 yk = new CreateBigPrime().getPrime(100);
                 xk = new GCD().getInverseEle(yk,fy);
                 pk = new CreateBigPrime().getPrime(110);
-                gxk = new Exponentiation().expMode(g, xk, fy);
-                pkdc = new Exponentiation().expMode(pk, dc, fy);
-                Object[] recordData = {coord, gxk, yk, pk, pkdc, xk, dc};
+                gxk = new Exponentiation().expMode(g, xk);
+                pkdc = new Exponentiation().expMode(pk, dc);
+                Object[] recordData = {coord, gxk, yk, pk, pkdc};
                 nodes.add(new Node(recordData, datas[i]));
             }
             // 如果父节点编号为x，那么左子节点的编号是2x，右子节点的编号是2x+1
@@ -351,8 +389,6 @@ public class GroupCenter {
          */
         public ArrayList<Integer> getPathByLeafNode(int num){
             ArrayList<Integer> pathList = new ArrayList<>();
-            int h = (int)log(defaultData.length, 2);
-            int[] xy = this.getXY(num);
             pathList.add(num);
             int temp = num;
 
