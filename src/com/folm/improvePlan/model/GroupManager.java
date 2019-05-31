@@ -79,22 +79,25 @@ public class GroupManager {
      * @return
      */
     public boolean checkSign(Object[] sign){
-        BigInteger pk = (BigInteger)sign[5];
-        BigInteger dc = (BigInteger)sign[6];
+        // 解析签名中的内容
+        BigInteger pk = (BigInteger) sign[5];
+        BigInteger[] pkdc = (BigInteger[]) sign[6];
         BigInteger u = (BigInteger)sign[1];
-        System.out.println("验证u"+u);
+        System.out.println("验证u:"+u);
         BigInteger r1 = (BigInteger)sign[2];
         BigInteger r2 = (BigInteger)sign[3];
         BigInteger r3 = (BigInteger)sign[4];
         String msg = (String)sign[0];
+        // 获取公开的信息
         BigInteger c = gcenter.getCRTC();
         BigInteger g = gcenter.getG();
         BigInteger ec = gcenter.getEc();
         BigInteger nc = gcenter.getNc();
-        BigInteger right1 = new Exponentiation().expMode(pk,dc.multiply(ec),nc);
+        BigInteger right1 = new Exponentiation().expMode(pk,pkdc[1].multiply(ec),nc);
         boolean f1 = (pk.compareTo(right1)==0)?true:false;
+        System.out.println("第一个验证："+f1);
         BigInteger yt =c.mod(pk);
-        BigInteger z1p = new Exponentiation().expMode(r3, yt, nc);
+        BigInteger z1p = new Exponentiation().expMode(r3, yt, nc);   
         System.out.println("z1p"+z1p);
         BigInteger z2pf = new Exponentiation().expMode(idg,u,ng);
         BigInteger z2ps = new Exponentiation().expMode(g,r1,ng);

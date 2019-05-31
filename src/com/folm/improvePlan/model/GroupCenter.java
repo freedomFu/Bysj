@@ -82,6 +82,20 @@ public class GroupCenter {
     }
 
     /**
+     * 获取 sc rc
+     * @param idi
+     * @return
+     */
+    public BigInteger[] getrcSc(BigInteger[] idi){
+        BigInteger ng = gmanager.getNg();
+        BigInteger hashMsg = GroupCenter.MyHash(String.valueOf(new Exponentiation().expMode(idi[0],idi[1],ng)));
+        BigInteger rc = new Exponentiation().expMode(g,alpha,ng);
+        BigInteger sc = alpha.add((rc.multiply(hashMsg)));
+        BigInteger[] res = {rc, sc};
+        return res;
+    }
+
+    /**
      * 验证群中心是否合法
      * @param idi
      * @return
@@ -89,8 +103,9 @@ public class GroupCenter {
     public Object[] getEleCheckNewMemberLegal(BigInteger[] idi){
         BigInteger ng = gmanager.getNg();
         BigInteger hashMsg = GroupCenter.MyHash(String.valueOf(new Exponentiation().expMode(idi[0],idi[1],ng)));
-        BigInteger rc = new Exponentiation().expMode(g,alpha,ng);
-        BigInteger sc = alpha.add((rc.multiply(hashMsg)));//删除了xc ，试一试 剩下的能不能解决
+        BigInteger[] rcsc = getrcSc(idi);
+        BigInteger rc = rcsc[0];
+        BigInteger sc = rcsc[1];
 
         BigInteger left = new Exponentiation().expMode(g,sc,ng);
         BigInteger right = rc.multiply(new Exponentiation().expMode(g,rc.multiply(hashMsg),ng)).mod(ng);
@@ -120,9 +135,20 @@ public class GroupCenter {
      * @return
      */
     public BigInteger getRc(BigInteger[] idi){
-        Object[] res = getEleCheckNewMemberLegal(idi);
-        BigInteger rc = (BigInteger)res[1];
+        BigInteger[] res = getrcSc(idi);
+        BigInteger rc = res[0];
         return rc;
+    }
+
+    /**
+     * 获取rc 的 dc次幂
+     * @param idi
+     * @return
+     */
+    public BigInteger[] getrcdc(BigInteger[] idi){
+        BigInteger rc = getRc(idi);
+        BigInteger[] res = new Exponentiation().expMode(rc, dc);
+        return res;
     }
 
     /**
@@ -165,15 +191,14 @@ public class GroupCenter {
      * 群成员撤销
      * @param groupMember
      */
-    /*public void revokeMember(GroupMember groupMember){
+    public void revokeMember(GroupMember groupMember){
         int[] xy = groupMember.getXy();
-        BigInteger idi = groupMember.getIdi();
         int num = (int)Math.pow(2,xy[0]) + xy[1] - 2;
         int index = num-((int)Math.pow(2,xy[0])-1);
         System.out.println("这是列表中的元素，小标为："+index);
         memberRecordList.remove(index);
         // 接下来要重新计算C
-    }*/
+    }
 
     /**
      * 获取集合
@@ -326,6 +351,11 @@ public class GroupCenter {
         return Math.log(value) / Math.log(base);
     }
 
+    /**
+     * 获取群成员记录信息
+     * @param index
+     * @return
+     */
     public Object[] getRecord(int index){
         return sbtree.getMemberRecordData(index);
     }

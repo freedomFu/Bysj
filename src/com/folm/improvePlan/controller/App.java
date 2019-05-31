@@ -41,11 +41,12 @@ public class App {
         }else{
             System.out.println("失败");
         }
-        /*Object[] sign = gm.signMsg("ni da qiu xiang caixukun");
+        System.out.println("dhjaksdjsa");
+        Object[] sign = gm.signMsg("ni da qiu xiang caixukun");
         System.out.println(Arrays.toString(sign));
         gman.checkSign(sign);
 
-        System.out.println(gc.getCRTC());
+        /*System.out.println(gc.getCRTC());
         GroupMember gm1 = gc.getMemberRecordList().get(2);
         gc.revokeMember(gm1);
 

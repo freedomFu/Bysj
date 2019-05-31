@@ -55,48 +55,62 @@ public class GroupMember {
      * 群成员获取自己的成员证书
      * @return
      */
-    /*private Object[] getCertificate(){
+    private Object[] getCertificate(){
         // 获取 rc sc
-        BigInteger[] rcSc = gcenter.getEleCheckNewMemberLegal(idi);
-        BigInteger rc = rcSc[1];
-        BigInteger sc = rcSc[3];
-        BigInteger wg = gman.getWg(idi, rc);
-        Object[] res = {rc, sc, wg, recordList};
+        BigInteger[] rcSc = gcenter.getrcSc(idi);
+        BigInteger rc = rcSc[0];
+        BigInteger sc = rcSc[1];
+        BigInteger[] wg = gman.getWg(idi);
+        BigInteger[] rcdc = gcenter.getrcdc(idi);
+        Object[] res = {rc, rcdc, sc, wg, recordList};
         return res;
     }
 
+    /**
+     * 成员签名
+     * @param msg
+     * @return
+     */
     public Object[] signMsg(String msg){
+        // 获取群成员的成员证书
         Object[] res = getCertificate();
         BigInteger rc = (BigInteger)res[0];
-        BigInteger sc = (BigInteger)res[1];
-        BigInteger wg = (BigInteger)res[2];
+        BigInteger sc = (BigInteger)res[2];
+        // 获取 wg 相关信息
+        BigInteger[] wg = (BigInteger[])res[3];
+        BigInteger wgbase = wg[0];
+        BigInteger wgexpo = wg[1];
         BigInteger c = gcenter.getCRTC();
+        // 生成两个beta
         BigInteger beta1 = new CreateBigPrime().getPrime(100);
         BigInteger beta2 = new CreateBigPrime().getPrime(100);
+        // 对消息进行哈希加密
         BigInteger hashmsg = GroupCenter.MyHash(msg);
+        // 获取公开的信息
         BigInteger g = gcenter.getG();
         BigInteger nc = gcenter.getNc();
         BigInteger eg = gman.getEg();
         BigInteger ng = gman.getNg();
+        // 计算z1，z2
         BigInteger z1 = new Exponentiation().expMode(g, hashmsg, nc);
         BigInteger z2 = (new Exponentiation().expMode(beta2,eg,ng)).multiply(new Exponentiation().expMode(g,beta1,ng)).mod(ng);
-        String mix = z1+msg+z2;
-        BigInteger u = GroupCenter.MyHash(mix);
-        BigInteger r1 = beta1.add(u.multiply(k.add(sc)).mod(ng));
-        BigInteger r2 = beta2.multiply(new Exponentiation().expMode(wg,u,ng)).mod(ng);
+        // 计算 u
+        BigInteger u = GroupCenter.MyHash(z1, z2, msg);
+        BigInteger r1 = beta1.add(u.multiply(k.add(sc)).mod(ng)).mod(ng);
+        BigInteger r2 = beta2.multiply(new Exponentiation().expMode(wgbase,wgexpo.multiply(u),ng)).mod(ng);
         int num = this.getNum();
         Object[] oarray = gcenter.getRecord(num);
-        BigInteger xk = (BigInteger)oarray[5];
+        BigInteger[] gxk = (BigInteger[])oarray[1];
         BigInteger pk = (BigInteger)oarray[3];
-        BigInteger dc = (BigInteger)oarray[6];
-        BigInteger r3 = new Exponentiation().expMode(g, xk.multiply(GroupCenter.MyHash(msg)),nc);
-        Object[] signRes = {msg,u,r1,r2,r3,pk,dc};
+        BigInteger[] pkdc = (BigInteger[])oarray[4];
+        BigInteger r3 = new Exponentiation().expMode(gxk[0], gxk[1].multiply(GroupCenter.MyHash(msg)),nc);
+        Object[] signRes = {msg,u,r1,r2,r3,pk,pkdc};
 
         System.out.println("z1:"+z1);
         System.out.println("z2:"+z2);
 
         return signRes;
-    }*/
+    }
 
     public int[] getXy() {
         return xy;
@@ -106,6 +120,10 @@ public class GroupMember {
         return idi;
     }
 
+    /**
+     * 用户自己验证是否可以入群
+     * @return
+     */
     public boolean isLegal(){
         BigInteger[] wgarr = gman.getWg(idi);
         BigInteger rc = gcenter.getRc(idi);
