@@ -4,8 +4,8 @@ import com.folm.improvePlan.Utils.CRT;
 import com.folm.improvePlan.Utils.CreateBigPrime;
 import com.folm.improvePlan.Utils.Exponentiation;
 import com.folm.improvePlan.Utils.GCD;
+import com.folm.improvePlan.gui.TextPanel;
 
-import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -24,6 +24,7 @@ import java.util.List;
  * @author folm
  */
 public class GroupCenter {
+    private TextPanel tp;
     private BigInteger idc;
     private BigInteger q1;
     private BigInteger q2;
@@ -38,35 +39,53 @@ public class GroupCenter {
     private int[] defaultData = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     private Subtree sbtree = new Subtree(defaultData);
     private List<GroupMember> memberRecordList = new ArrayList<>();
-    private GroupManager gmanager = new GroupManager(this);
+    private GroupManager gmanager;
 
     /**
      * 构造方法
      * 用于初始化群中心的身份 IDc,以及生成大素数q1,q2,以及选择出来的g
      */
-    public GroupCenter(){
+    public GroupCenter(TextPanel tp){
+        this.tp = tp;
+        tp.appendTextLn("已经成功进入群中心");
+        tp.appendTextLn("========================= 群中心生成过程 —— 开始 =========================");
         // 初始化群中心的身份 IDc  时间戳的平方
         idc = new BigInteger(String.valueOf(System.currentTimeMillis())).pow(2);
+        tp.appendTextLn("群中心身份 IDc："+idc);
         // 获取两个大素数  以及  欧拉函数（求 素数 个数）
         q1 = new CreateBigPrime().getPrime(1024);
         q2 = new CreateBigPrime().getPrime(1024);
+        tp.appendTextLn("选择大素数1："+q1);
+        tp.appendTextLn("选择大素数2："+q2);
         fy = q1.subtract(BigInteger.ONE).multiply(q2.subtract(BigInteger.ONE));
         // 计算乘积
         nc = q1.multiply(q2);
+        tp.appendTextLn("计算出 nc=q1 x q2："+nc);
         // 生成g
         g = new CreateBigPrime().getPrime(500);
+        tp.appendTextLn("生成 g："+g);
         // 私钥
         xc = new CreateBigPrime().getPrime(500);
         // 生成ec
         ec = new BigInteger("65537");
+        tp.appendTextLn("选择 ec："+ec);
         // 生成yc
         yc = new Exponentiation().expMode(g, xc, nc);
+        tp.appendTextLn("计算出 yc："+nc);
         // 计算dc
         dc = new GCD().getInverseEle(ec,fy);
         // 计算 alpha
         alpha = new CreateBigPrime().getPrime(100);
         // 创建子树 此时还没有初始化群成员
+        tp.appendTextLn("========================= 完备子树生成过程 —— 开始 =========================");
         sbtree.create();
+        tp.appendTextLn("========================= 完备子树生成过程 —— 结束 =========================");
+        tp.appendTextLn("========================= 群中心生成过程 —— 结束 =========================");
+        gmanager = new GroupManager(this,tp);
+    }
+
+    public GroupManager getGmanager() {
+        return gmanager;
     }
 
     /**
@@ -109,16 +128,10 @@ public class GroupCenter {
 
         BigInteger left = new Exponentiation().expMode(g,sc,ng);
         BigInteger right = rc.multiply(new Exponentiation().expMode(g,rc.multiply(hashMsg),ng)).mod(ng);
-        /*System.out.println(left);
-        System.out.println("==================");
-        System.out.println(right);*/
         boolean flag1 = (left.compareTo(right) == 0)?true:false;
 
         BigInteger left1 = rc.mod(nc);
         BigInteger right1 = new Exponentiation().expMode(rc,dc.multiply(ec),nc);
-        /*System.out.println(left1);
-        System.out.println("==================");
-        System.out.println(right1);*/
         boolean flag2 = (left1.compareTo(right1) == 0)?true:false;
         BigInteger[] gsc = {g,sc};
         if(flag1 && flag2){
@@ -316,21 +329,23 @@ public class GroupCenter {
         int h = (int)Math.ceil(this.log(defaultData.length, 2));
         int length = memberRecordList.size();
         int num = (int)Math.pow(2, h-1) - 1 + length;
-        ArrayList<Object[]> recordData = new ArrayList<>();
-        ArrayList<Integer> list = sbtree.getPathByLeafNode(num);
-
-        for(int i=0;i<list.size();i++){
-            int index = list.get(i);
-            Object[] oArray = sbtree.getMemberRecordData(index);
-            recordData.add(oArray);
-        }
-
         if(num<=14){
+
+            ArrayList<Object[]> recordData = new ArrayList<>();
+            ArrayList<Integer> list = sbtree.getPathByLeafNode(num);
+
+            for(int i=0;i<list.size();i++){
+                int index = list.get(i);
+                Object[] oArray = sbtree.getMemberRecordData(index);
+                recordData.add(oArray);
+            }
+
             int[] xy = sbtree.getXY(num);
             GroupMember gNewmember = new GroupMember(this, xy, recordData);
 
             if(null!=gNewmember){
                 memberRecordList.add(gNewmember);
+                tp.appendTextLn("群成员添加成功！");
                 return true;
             }
         }
@@ -418,6 +433,9 @@ public class GroupCenter {
                 gxk = new Exponentiation().expMode(g, xk);
                 pkdc = new Exponentiation().expMode(pk, dc);
                 Object[] recordData = {coord, gxk, yk, pk, pkdc};
+                tp.appendTextLn("生成坐标点 ("+coord[0]+","+coord[1]+")");
+                tp.appendTextLn("yk："+yk);
+                tp.appendTextLn("xk："+xk);
                 nodes.add(new Node(recordData, datas[i]));
             }
             // 如果父节点编号为x，那么左子节点的编号是2x，右子节点的编号是2x+1

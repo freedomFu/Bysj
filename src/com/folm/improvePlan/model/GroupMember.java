@@ -32,7 +32,7 @@ public class GroupMember {
     public GroupMember(GroupCenter gc, int[] xy, ArrayList<Object[]> recordList){
         // 传入群中心，然后可以在群成员中使用群中心公布的内容
         this.gcenter = gc;
-        gman = new GroupManager(gc);
+        gman = gc.getGmanager();
         k = new CreateBigPrime().getPrime(100);
         BigInteger g = gc.getG();
         idi = new Exponentiation().expMode(g,k);
@@ -49,6 +49,31 @@ public class GroupMember {
         int num = getNum();
         ArrayList<Object[]> arrayList = (ArrayList<Object[]>)gcenter.getPathNodeList(num)[1];
         return arrayList;
+    }
+
+    /**
+     * 获取存在Si中的那个节点的信息
+     * @return
+     */
+    public Object[] getSiRecord(){
+        // 获取num
+        int num = getNum();
+        int flag = 0;
+        ArrayList<Object[]> siRecord = (ArrayList<Object[]>)gcenter.getPathNodeList(num)[1];
+        int size = siRecord.size();
+        BigInteger c = gcenter.getCRTC();
+        for(int i=0;i<size;i++){
+            Object[] arr = siRecord.get(i);
+            BigInteger yk = (BigInteger) arr[1];
+            BigInteger pk = (BigInteger) arr[2];
+            BigInteger ykp = c.mod(pk);
+            if(yk.compareTo(ykp) == 0){
+                flag = i;
+                break;
+            }
+        }
+        Object[] res = siRecord.get(flag);
+        return res;
     }
 
     /**
@@ -74,13 +99,11 @@ public class GroupMember {
     public Object[] signMsg(String msg){
         // 获取群成员的成员证书
         Object[] res = getCertificate();
-        BigInteger rc = (BigInteger)res[0];
         BigInteger sc = (BigInteger)res[2];
         // 获取 wg 相关信息
         BigInteger[] wg = (BigInteger[])res[3];
         BigInteger wgbase = wg[0];
         BigInteger wgexpo = wg[1];
-        BigInteger c = gcenter.getCRTC();
         // 生成两个beta
         BigInteger beta1 = new CreateBigPrime().getPrime(100);
         BigInteger beta2 = new CreateBigPrime().getPrime(100);
@@ -94,20 +117,19 @@ public class GroupMember {
         // 计算z1，z2
         BigInteger z1 = new Exponentiation().expMode(g, hashmsg, nc);
         BigInteger z2 = (new Exponentiation().expMode(beta2,eg,ng)).multiply(new Exponentiation().expMode(g,beta1,ng)).mod(ng);
+
         // 计算 u
         BigInteger u = GroupCenter.MyHash(z1, z2, msg);
-        BigInteger r1 = beta1.add(u.multiply(k.add(sc)).mod(ng)).mod(ng);
-        BigInteger r2 = beta2.multiply(new Exponentiation().expMode(wgbase,wgexpo.multiply(u),ng)).mod(ng);
-        int num = this.getNum();
-        Object[] oarray = gcenter.getRecord(num);
-        BigInteger[] gxk = (BigInteger[])oarray[1];
-        BigInteger pk = (BigInteger)oarray[3];
-        BigInteger[] pkdc = (BigInteger[])oarray[4];
-        BigInteger r3 = new Exponentiation().expMode(gxk[0], gxk[1].multiply(GroupCenter.MyHash(msg)),nc);
-        Object[] signRes = {msg,u,r1,r2,r3,pk,pkdc};
+        BigInteger r1 = beta1.add(u.multiply(k.add(sc)));
+        Object[] r2 = {beta2, wgbase, u, wgexpo, ng};
+        Object[] oarray = this.getSiRecord();
+        BigInteger[] gxk = (BigInteger[])oarray[0];
 
-        System.out.println("z1:"+z1);
-        System.out.println("z2:"+z2);
+        BigInteger pk = (BigInteger)oarray[2];
+        BigInteger[] pkdc = (BigInteger[])oarray[3];
+        BigInteger[] r3 = new Exponentiation().expModeArr(gxk[0], gxk[1].multiply(GroupCenter.MyHash(msg)),nc);
+        Object[] r0 = {r3,beta1};
+        Object[] signRes = {msg, u, r1, r2, r0, pk, pkdc, idi};
 
         return signRes;
     }
@@ -118,6 +140,11 @@ public class GroupMember {
 
     public BigInteger[] getIdi() {
         return idi;
+    }
+
+    public BigInteger getUserId(){
+        BigInteger ng = gman.getNg();
+        return new Exponentiation().expMode(idi[0],idi[1],ng);
     }
 
     /**

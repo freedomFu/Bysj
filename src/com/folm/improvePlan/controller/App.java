@@ -1,6 +1,5 @@
 package com.folm.improvePlan.controller;
 
-import com.folm.improvePlan.Utils.CreateBigPrime;
 import com.folm.improvePlan.Utils.Exponentiation;
 import com.folm.improvePlan.model.GroupCenter;
 import com.folm.improvePlan.model.GroupManager;
@@ -13,10 +12,11 @@ import java.util.Arrays;
 public class App {
 
     public static void main(String[] args) {
-        GroupCenter gc = new GroupCenter();
+        /*GroupCenter gc = new GroupCenter();
         System.out.println(Arrays.toString(gc.getGroupInfo()));
 
-        GroupManager gman = new GroupManager(gc);
+        GroupManager gman = gc.getGmanager();
+        System.out.println("嘤嘤嘤"+gman);
         System.out.println(Arrays.toString(gman.getGroupManagerInfo()));
 
         gc.addMember();
@@ -25,11 +25,16 @@ public class App {
 
         GroupMember gm = gc.getMemberRecordList().get(1);
 
-        System.out.println(gc.getSi());
+        Object[] yyy = gm.getSiRecord();
+        System.out.println(Arrays.toString(yyy));
 
+        System.out.println(gc.getSi());
+        BigInteger ng = gman.getNg();
         ArrayList<Object[]> list = gm.getPathNodeList();
         System.out.println(list);
         BigInteger[] idi = gm.getIdi();
+        BigInteger idires = new Exponentiation().expMode(idi[0],idi[1],ng);
+        System.out.println("这个成员的idi是："+idires);
         Object[] res = gc.getEleCheckNewMemberLegal(idi);
         System.out.println(Arrays.toString(res));
         BigInteger rc = (BigInteger) res[1];
@@ -41,20 +46,19 @@ public class App {
         }else{
             System.out.println("失败");
         }
-        System.out.println("dhjaksdjsa");
         Object[] sign = gm.signMsg("ni da qiu xiang caixukun");
         System.out.println(Arrays.toString(sign));
         gman.checkSign(sign);
 
-        /*System.out.println(gc.getCRTC());
+        BigInteger revokeRes = gman.showSignMemberidi(sign);
+        System.out.println("蔡徐坤"+revokeRes);
+
+        System.out.println(gc.getCRTC());
         GroupMember gm1 = gc.getMemberRecordList().get(2);
         gc.revokeMember(gm1);
 
-        System.out.println(gc.getCRTC());*/
-
-
-
-        System.out.println("执行结束");
+        System.out.println(gc.getCRTC());
+        System.out.println("执行结束");*/
 
     }
 
